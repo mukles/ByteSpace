@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@import "./variables.css";
+@import "./utilities.css";
+
+@layer base {
+  @import "./base.css";
+}
+
+@layer components {
+  @import "./component.css";
+}
