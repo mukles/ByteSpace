@@ -1,128 +1,40 @@
 @theme {
-  /* ----------------------------------------------------------
-     TYPOGRAPHY — Font Families (next/font CSS variables)
-  ---------------------------------------------------------- */
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-clash-display), ui-sans-serif, system-ui, sans-serif;
 
-  /* Headings — Poppins via next/font/google (auto self-hosted) */
-  --font-heading: var(--font-poppins, "Poppins"), sans-serif;
+  --color-persian-blue-800: #003be2;
+  --color-electric-lime-400: #d4fb20;
+  --color-electric-lime-500: #cbfc01;
+  --color-electric-violet-600: #7f30f7;
+  --color-electric-violet-950: #300b6a;
 
-  /* Body / nav / buttons — Satoshi via next/font/local */
-  --font-body: var(--font-satoshi, "Satoshi"), sans-serif;
+  --color-shuttle-gray-50: #f5f5f6;
+  --color-shuttle-gray-100: #e5e6e8;
+  --color-shuttle-gray-200: #ced0d3;
+  --color-shuttle-gray-300: #abaeb5;
+  --color-shuttle-gray-400: #82868e;
+  --color-shuttle-gray-700: #4b4c53;
+  --color-shuttle-gray-900: #3a3b3f;
+  --color-shuttle-gray-950: #242528;
 
-  /* Logo wordmark — Clash Display via next/font/local */
-  --font-brand: var(--font-clash-display, "Clash Display"), sans-serif;
+  --color-black-700: #4f4f4f;
+  --color-black-950: #000000;
+  --color-white: #ffffff;
 
-  /* Tailwind font-family utility tokens */
-  --font-family-heading: var(--font-poppins, "Poppins"), sans-serif;
-  --font-family-body: var(--font-satoshi, "Satoshi"), sans-serif;
-  --font-family-display: var(--font-clash-display, "Clash Display"), sans-serif;
-
-  /* ----------------------------------------------------------
-     TYPOGRAPHY — Font Weights
-  ---------------------------------------------------------- */
-
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
-  /* ----------------------------------------------------------
-     TYPOGRAPHY — Font Sizes (from Figma text nodes)
-  ---------------------------------------------------------- */
-
-  --text-xs: 0.625rem; /* 10px  — tiny labels */
-  --text-sm: 0.75rem; /* 12px  — card metadata */
-  --text-base: 0.875rem; /* 14px  — small UI labels */
-  --text-md: 1rem; /* 16px  — nav links, footer */
-  --text-lg: 1.125rem; /* 18px  — body text, buttons */
-  --text-xl: 1.25rem; /* 20px  — card titles */
-  --text-2xl: 1.5rem; /* 24px  — logo, revenue */
-  --text-3xl: 2.25rem; /* 36px  — stat numbers */
-  --text-4xl: 2.75rem; /* 44px  — section headings */
-  --text-5xl: 3rem; /* 48px  — progress % */
-  --text-hero: 4.5rem; /* 72px  — hero headline */
-
-  /* ----------------------------------------------------------
-     TYPOGRAPHY — Line Heights & Letter Spacing
-  ---------------------------------------------------------- */
-
-  --leading-tight: 1.2;
-  --leading-snug: 1.3;
-  --leading-normal: 1.6;
-  --leading-relaxed: 1.8;
-
-  --tracking-tight: -0.72px; /* Hero headline */
-  --tracking-normal: 0px;
-  --tracking-wide: 0.05em; /* Uppercase labels */
-
-  /* ----------------------------------------------------------
-     COLOR — Brand Palette
-  ---------------------------------------------------------- */
-
-  /* Primary Accent: Lime / Yellow-Green (#D4FB20) */
-  --color-brand-lime: #d4fb20;
-  --color-brand-lime-hover: #c5f010;
-
-  /* Secondary Accent: Blue (#003BE3) */
-  --color-brand-blue: #003be3;
-
-  /* Tertiary Accent: Violet / Purple (#7F30F7) */
-  --color-brand-violet: #7f30f7;
-
-  /* ----------------------------------------------------------
-     COLOR — Backgrounds
-  ---------------------------------------------------------- */
-
-  --color-bg-dark: #000000; /* Hero / CTA section */
-  --color-bg-dark-alt: #040818; /* Deep navy headings */
-  --color-bg-light: #ffffff; /* Cards, content sections */
-  --color-bg-subtle: #f5f5f7; /* Light gray surface */
-
-  /* ----------------------------------------------------------
-     COLOR — Text
-  ---------------------------------------------------------- */
-
-  --color-text-primary: #f5f5f7; /* On dark — nav, headings */
-  --color-text-secondary: #e5e6e8; /* On dark — hero subtitle */
-  --color-text-muted: #828489; /* Placeholder, search icon */
-  --color-text-dark: #242528; /* On light — primary body */
-  --color-text-gray: #4b4f53; /* On light — secondary body */
-  --color-text-light-gray: #4f4f4f; /* Card metadata */
-  --color-text-violet: #7f30f7; /* Featured Categories label */
-  --color-text-blue: #003be3; /* Prices, links, tabs */
-
-  /* ----------------------------------------------------------
-     COLOR — UI Elements
-  ---------------------------------------------------------- */
+  /* Semantic */
+  --color-primary: var(--color-persian-blue-800);
+  --color-primary-foreground: var(--color-white);
+  --color-secondary: var(--color-electric-lime-400);
+  --color-secondary-hover: var(--color-electric-lime-500);
+  --color-secondary-foreground: var(--color-black-950);
+  --color-accent: var(--color-electric-violet-600);
+  --color-accent-dark: var(--color-electric-violet-950);
+  --color-accent-foreground: var(--color-white);
 
   --color-border: #e4e4e4;
   --color-border-dark: rgba(255, 255, 255, 0.12);
   --color-star: #facc15;
-
-  /* ----------------------------------------------------------
-     SPACING — Layout
-  ---------------------------------------------------------- */
-
-  --container-max: 1440px;
-  --container-inner: 1200px;
-  --container-pad: 5.5rem;
-  --section-py: 6rem;
-  --section-py-lg: 9rem;
-
-  /* ----------------------------------------------------------
-     BORDER RADIUS
-  ---------------------------------------------------------- */
-
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-2xl: 3rem;
-  --radius-full: 9999px;
-
-  /* ----------------------------------------------------------
-     SHADOWS — from Figma image shadow stack
-  ---------------------------------------------------------- */
 
   --shadow-card:
     0px 1px 3px rgba(0, 0, 0, 0.04), 0px 3px 6px rgba(0, 0, 0, 0.06),
@@ -132,11 +44,14 @@
     0px 5px 10px rgba(0, 0, 0, 0.06), 0px 17px 24px rgba(0, 0, 0, 0.08),
     0px 37px 56px rgba(0, 0, 0, 0.1), 0px 51px 73px rgba(0, 0, 0, 0.13);
 
-  /* ----------------------------------------------------------
-     TRANSITIONS
-  ---------------------------------------------------------- */
-
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow: 400ms ease;
+  /* Figma effect "A" — a drop-shadow so it follows transparent images */
+  --drop-shadow-elevated:
+    0.52px 0.74px 3.04px rgba(0, 0, 0, 0.04),
+    2.23px 3.19px 5.72px rgba(0, 0, 0, 0.06),
+    5.38px 7.69px 9.57px rgba(0, 0, 0, 0.07),
+    10.21px 14.58px 16.09px rgba(0, 0, 0, 0.08),
+    16.95px 24.21px 24px rgba(0, 0, 0, 0.09),
+    25.84px 36.91px 36px rgba(0, 0, 0, 0.1),
+    37.12px 53.03px 56px rgba(0, 0, 0, 0.11),
+    51.04px 72.91px 72px rgba(0, 0, 0, 0.13);
 }
