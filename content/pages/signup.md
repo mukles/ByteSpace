@@ -24,17 +24,8 @@ form:
       placeholder: "********"
       autoComplete: "new-password"
   submit: "Continue"
-  loginPrompt: "Already have an account?"
-  login:
+  prompt: "Already have an account?"
+  promptLink:
     label: "Login"
     href: "/login"
-showcase:
-  courses:
-    - "Build Digital Asset"
-    - "the Power of Big Data"
-  happyStudents:
-    label: "Happy Students"
-    rating: "4.5"
-    reviews: "(240)"
-    count: "2K+"
 ---

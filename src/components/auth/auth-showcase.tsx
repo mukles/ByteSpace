@@ -1,7 +1,8 @@
 import { CourseCard } from "@/components/courses/course-card";
 import { HappyStudentsCard } from "@/components/hero/hero-cards";
 import { HeroShape } from "@/components/hero/hero-shape";
-import type { Course, SignupData } from "@/types/content";
+import { readMd } from "@/lib/content";
+import type { AuthShowcaseData, CourseShowcaseData } from "@/types/content";
 
 // Positions are from the Figma frame, relative to the left column's top-left
 const CARD_POSITIONS = [
@@ -35,16 +36,14 @@ const SHAPES = [
   },
 ] as const;
 
-interface SignupShowcaseProps {
-  courses: Course[];
-  happyStudents: SignupData["showcase"]["happyStudents"];
-}
+// Decorative collage beside the auth forms — hidden from assistive tech and pointer input
+export function AuthShowcase() {
+  const { data } = readMd<AuthShowcaseData>("auth-showcase");
+  const { data: catalog } = readMd<CourseShowcaseData>("pages/course-showcase");
+  const courses = data.courses
+    .map((title) => catalog.courses.find((course) => course.title === title))
+    .filter((course) => course !== undefined);
 
-// Decorative collage beside the form — hidden from assistive tech and pointer input
-export function SignupShowcase({
-  courses,
-  happyStudents,
-}: SignupShowcaseProps) {
   return (
     <div
       aria-hidden="true"
@@ -61,7 +60,7 @@ export function SignupShowcase({
         </div>
       ))}
       <HappyStudentsCard
-        {...happyStudents}
+        {...data.happyStudents}
         variant="lime"
         style={{ left: 228, top: 620 }}
       />
