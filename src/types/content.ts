@@ -248,3 +248,9 @@ export interface CreatorProfileData {
   sort: ToolbarButton;
   emptyMessage: string;
 }
+
+export interface NotFoundData {
+  heading: string;
+  body: string;
+  cta: NavLink;
+}
