@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import type { CoursesPageData, ToolbarButton } from "@/types/content";
+import type { ToolbarButton } from "@/types/content";
 
 const buttonClass =
   "flex min-h-12 shrink-0 cursor-pointer items-center gap-1 rounded-[24px] border border-shuttle-gray-200 bg-white px-4 py-3 text-base leading-[1.2] font-medium whitespace-nowrap text-shuttle-gray-950 transition-colors hover:bg-shuttle-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -27,7 +27,11 @@ export function CourseToolbar({
   filters,
   sort,
   itemClassName,
-}: Pick<CoursesPageData, "filters" | "sort"> & { itemClassName?: string }) {
+}: {
+  filters: ToolbarButton[];
+  sort: ToolbarButton;
+  itemClassName?: string;
+}) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-4">
       <div

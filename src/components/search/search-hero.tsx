@@ -5,18 +5,23 @@ import type { CoursesPageData } from "@/types/content";
 
 type SearchHeroProps = Pick<
   CoursesPageData,
-  "heading" | "searchPlaceholder" | "scopeLabel"
-> & { query?: string };
+  "heading" | "searchPlaceholder" | "scopes"
+> & {
+  query?: string;
+  scope?: string;
+  hiddenFields?: Record<string, string>;
+};
 
 export function SearchHero({
   heading,
   searchPlaceholder,
-  scopeLabel,
+  scopes,
   query,
+  scope,
+  hiddenFields,
 }: SearchHeroProps) {
   return (
     <section className="relative isolate overflow-hidden bg-primary">
-      {/* Offset by the navbar height so the grid runs on from the header */}
       <Image
         src="/images/auth/grid.svg"
         alt=""
@@ -36,10 +41,12 @@ export function SearchHero({
           {heading}
         </Heading>
         <SearchBar
+          key={`${query}|${scope}`}
           placeholder={searchPlaceholder}
-          label={scopeLabel}
-          scope
+          scopes={scopes}
+          scopeValue={scope}
           defaultValue={query}
+          hiddenFields={hiddenFields}
           className="max-w-[621px]"
         />
       </div>
