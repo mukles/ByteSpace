@@ -1,0 +1,23 @@
+---
+heading: "Explore Diverse Learning Paths at Bytespace"
+subheading: "At Bytespace, we believe in empowering individuals through knowledge. Our diverse range of courses spans various fields, ensuring there's something for everyone. Unleash your potential and explore our carefully curated categories."
+categories:
+  - name: "Design"
+    icon: "/images/categories/design.svg"
+    href: "/courses"
+  - name: "Development"
+    icon: "/images/categories/development.svg"
+    href: "/courses"
+  - name: "IT & Software"
+    icon: "/images/categories/it-software.svg"
+    href: "/courses"
+  - name: "Business"
+    icon: "/images/categories/business.svg"
+    href: "/courses"
+  - name: "Marketing"
+    icon: "/images/categories/marketing.svg"
+    href: "/courses"
+  - name: "Photography"
+    icon: "/images/categories/photography.svg"
+    href: "/courses"
+---
