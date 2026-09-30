@@ -146,5 +146,5 @@ creator:
   avatar: "/images/course-details/creator.png"
   bio: "Ready to Dive In? Enroll Now and Start Building Your Digital Future!"
   profileLabel: "See Full Profile"
-  profileHref: "/creators"
+  profileHref: "/creators/purepearl-studio"
 ---
