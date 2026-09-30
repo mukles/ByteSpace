@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import type { FooterData } from "@/types/content";
 
 export function NewsletterForm({
@@ -11,9 +11,8 @@ export function NewsletterForm({
 }: FooterData["newsletter"]) {
   const [subscribed, setSubscribed] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    // No newsletter backend yet — acknowledge locally
     setSubscribed(true);
     event.currentTarget.reset();
   }

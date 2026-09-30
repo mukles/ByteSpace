@@ -12,7 +12,6 @@ const AVATARS = Array.from(
 const statChipClass =
   "rounded-[24px] bg-[rgba(246,246,246,0.6)] px-3 py-1.5 text-xs leading-[1.2] font-medium text-black-700 backdrop-blur-[4px]";
 
-// "highlight" is the promo variant: lime star and dark enrolled bubble
 const VARIANTS = {
   default: {
     star: "/images/courses/star.svg",
@@ -70,7 +69,6 @@ export function CourseCard({
               balance={false}
               className="truncate leading-[1.2] text-black-950"
             >
-              {/* Stretched link makes the whole card clickable */}
               <Link
                 href="/courses"
                 className="after:absolute after:inset-0 focus-visible:outline-none after:rounded-[24px] focus-visible:after:ring-2 focus-visible:after:ring-primary"
