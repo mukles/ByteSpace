@@ -1,8 +1,26 @@
 ---
 title: "Courses"
 description: "Explore diverse learning paths across Design, Development, Business, Marketing, and more."
+heading: "Find Your Next Course"
+searchPlaceholder: "Search"
+scopeLabel: "Courses"
+filters:
+  - label: "Filter"
+  - label: "Level"
+  - label: "Category"
+sort:
+  label: "Most relevant"
+categories:
+  - "Music"
+  - "Drawing & Painting"
+  - "Marketing"
+  - "Animation"
+  - "Social Media"
+  - "UI/UX Design"
+  - "Creative Marketing"
+  - "Cooking"
+pageSize: 18
+pagination:
+  current: 1
+  total: 5
 ---
-
-# Explore Diverse Learning Paths at Bytespace
-
-At Bytespace, we believe in empowering individuals through knowledge. Our diverse range of courses spans various fields, ensuring there's something for everyone. Unleash your potential and explore our carefully curated categories.

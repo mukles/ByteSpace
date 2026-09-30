@@ -85,3 +85,21 @@ export interface SignupData {
     happyStudents: HeroData["happyStudents"];
   };
 }
+
+export interface ToolbarButton {
+  label: string;
+  /** 24px icon, optional */
+  icon?: string;
+}
+
+export interface CoursesPageData {
+  heading: string;
+  searchPlaceholder: string;
+  scopeLabel: string;
+  filters: ToolbarButton[];
+  sort: ToolbarButton;
+  categories: string[];
+  /** Cards per page in the design's grid */
+  pageSize: number;
+  pagination: { current: number; total: number };
+}
