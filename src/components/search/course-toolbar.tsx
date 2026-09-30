@@ -26,7 +26,8 @@ function ToolbarItem({
 export function CourseToolbar({
   filters,
   sort,
-}: Pick<CoursesPageData, "filters" | "sort">) {
+  itemClassName,
+}: Pick<CoursesPageData, "filters" | "sort"> & { itemClassName?: string }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-4">
       <div
@@ -35,10 +36,10 @@ export function CourseToolbar({
         className="flex flex-wrap gap-4"
       >
         {filters.map((filter) => (
-          <ToolbarItem key={filter.label} {...filter} />
+          <ToolbarItem key={filter.label} {...filter} className={itemClassName} />
         ))}
       </div>
-      <ToolbarItem {...sort} />
+      <ToolbarItem {...sort} className={itemClassName} />
     </div>
   );
 }
