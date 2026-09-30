@@ -26,6 +26,8 @@ export interface HeroData {
 
 export interface Course {
   title: string;
+  /** URL segment for /courses/[slug]; details come from content/courses/<slug>.md when it exists */
+  slug: string;
   image: string;
   category: string;
   author: string;
@@ -107,6 +109,79 @@ export interface CoursesPageData {
   /** Cards per page in the design's grid */
   pageSize: number;
   pagination: { current: number; total: number };
+}
+
+export interface IconLabel {
+  label: string;
+  /** 24px icon */
+  icon: string;
+}
+
+export interface CourseLesson {
+  title: string;
+  duration: string;
+}
+
+export interface CourseReview {
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+  date: string;
+  body: string;
+}
+
+export interface CourseDetailsData {
+  title: string;
+  subtitle: string;
+  description: string;
+  author: string;
+  stats: IconLabel[];
+  shareLabel: string;
+  preview: { image: string; playLabel: string };
+  tabs: string[];
+  about: {
+    descriptionHeading: string;
+    description: string[];
+    sneakPeekHeading: string;
+    sneakPeek: string[];
+    keyPointsHeading: string;
+    keyPoints: string[];
+  };
+  curriculum: {
+    modulesHeading: string;
+    modulesIntro: string;
+    listHeading: string;
+    modules: { title: string; summary: string }[];
+    contentHeading: string;
+    content: string;
+    progressHeading: string;
+    progressIntro: string;
+    /** Percentage, 0–100 */
+    progress: { label: string; value: number };
+  };
+  reviews: {
+    heading: string;
+    intro: string;
+    ratingLabel: string;
+    rating: string;
+    breakdown: { stars: number; count: number; percent: number }[];
+    listHeading: string;
+    allLabel: string;
+    emptyMessage: string;
+    items: CourseReview[];
+  };
+  lessons: { heading: string; items: CourseLesson[]; more: string };
+  enroll: { pitch: string; price: string; priceSuffix: string; cta: string };
+  includes: { heading: string; items: IconLabel[] };
+  creator: {
+    name: string;
+    role: string;
+    avatar: string;
+    bio: string;
+    profileLabel: string;
+    profileHref: string;
+  };
 }
 
 export interface CreatorProfileData {
