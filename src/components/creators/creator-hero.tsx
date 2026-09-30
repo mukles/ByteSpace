@@ -5,7 +5,7 @@ import { FollowButton } from "./follow-button";
 
 type CreatorHeroProps = Omit<
   CreatorProfileData,
-  "filters" | "sort" | "emptyMessage"
+  "productsLabel" | "toolbarIcons" | "emptyMessage" | "noResults"
 >;
 
 export function CreatorHero({

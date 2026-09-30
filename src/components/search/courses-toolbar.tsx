@@ -23,7 +23,20 @@ type CoursesToolbarProps = Pick<
   | "clearLabel"
 > & {
   categories: string[];
+  // Optional leading icons, as on the creator profile toolbar
+  icons?: Partial<Record<"filter" | "level" | "category" | "sort", string>>;
+  buttonClassName?: string;
 };
+
+function withIcon(label: string, icon?: string) {
+  if (!icon) return label;
+  return (
+    <>
+      <Image src={icon} alt="" width={24} height={24} />
+      {label}
+    </>
+  );
+}
 
 const clearClass =
   "cursor-pointer text-sm leading-[1.2] font-medium text-primary hover:underline disabled:cursor-default disabled:text-shuttle-gray-300 disabled:no-underline";
@@ -38,6 +51,8 @@ export function CoursesToolbar({
   sortOptions,
   clearLabel,
   categories,
+  icons = {},
+  buttonClassName,
 }: CoursesToolbarProps) {
   const { query, update } = useCourseSearch();
   const id = useId();
@@ -68,8 +83,9 @@ export function CoursesToolbar({
         className="flex flex-wrap gap-4"
       >
         <ToolbarDropdown
-          label={filterLabel}
+          label={withIcon(filterLabel, icons.filter)}
           panelLabel={filterLabel}
+          buttonClassName={buttonClassName}
           count={filterCount}
         >
           {() => (
@@ -123,8 +139,9 @@ export function CoursesToolbar({
         </ToolbarDropdown>
 
         <ToolbarDropdown
-          label={level.label}
+          label={withIcon(level.label, icons.level)}
           panelLabel={level.label}
+          buttonClassName={buttonClassName}
           count={query.levels.length}
         >
           {() => (
@@ -157,8 +174,9 @@ export function CoursesToolbar({
         </ToolbarDropdown>
 
         <ToolbarDropdown
-          label={categoryLabel}
+          label={withIcon(categoryLabel, icons.category)}
           panelLabel={categoryLabel}
+          buttonClassName={buttonClassName}
           count={query.category ? 1 : 0}
         >
           {(close) => (
@@ -185,16 +203,19 @@ export function CoursesToolbar({
       </div>
 
       <ToolbarDropdown
-        label={sortLabel}
+        label={withIcon(sortLabel, icons.sort)}
         panelLabel="Sort courses"
         align="right"
+        buttonClassName={buttonClassName}
         trailing={
-          <Image
-            src="/images/search/arrow-down.svg"
-            alt=""
-            width={20}
-            height={20}
-          />
+          !icons.sort && (
+            <Image
+              src="/images/search/arrow-down.svg"
+              alt=""
+              width={20}
+              height={20}
+            />
+          )
         }
       >
         {(close) => (

@@ -2,9 +2,19 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CourseCard } from "@/components/courses/course-card";
 import { CreatorHero } from "@/components/creators/creator-hero";
-import { CourseToolbar } from "@/components/search/course-toolbar";
-import { getCreatorSlugs, readMd } from "@/lib/content";
-import type { CourseShowcaseData, CreatorProfileData } from "@/types/content";
+import { CoursesToolbar } from "@/components/search/courses-toolbar";
+import {
+  ClearAllButton,
+  CourseSearchProvider,
+  ResultsPane,
+} from "@/components/search/search-state";
+import {
+  activeFilterCount,
+  parseCourseQuery,
+  searchCourses,
+} from "@/lib/course-search";
+import { getCatalog, getCreatorSlugs, readMd } from "@/lib/content";
+import type { CoursesPageData, CreatorProfileData } from "@/types/content";
 
 export const dynamicParams = false;
 
@@ -27,43 +37,71 @@ export async function generateMetadata({
 
 export default async function CreatorProfilePage({
   params,
+  searchParams,
 }: PageProps<"/creators/[slug]">) {
-  const { filters, sort, emptyMessage, ...profile } = await getCreator(params);
-  const { data: catalog } = readMd<CourseShowcaseData>("pages/course-showcase");
+  const { productsLabel, toolbarIcons, emptyMessage, noResults, ...profile } =
+    await getCreator(params);
+  const query = parseCourseQuery(await searchParams);
+  // The toolbar shares its labels and options with the courses page
+  const { data } = readMd<CoursesPageData>("pages/courses");
 
   // Courses credit their creator by name in the catalogue
-  const courses = catalog.courses.filter(
+  const own = getCatalog().filter(
     (course) => course.author.toLowerCase() === profile.name.toLowerCase(),
   );
+  const categories = [...new Set(own.map((c) => c.category))].sort();
+  const courses = searchCourses(own, query);
+  const isFiltered = activeFilterCount(query) > 0;
 
   return (
     <main>
-      <CreatorHero {...profile} />
+      <CreatorHero
+        {...profile}
+        stats={[
+          { value: String(own.length), label: productsLabel },
+          ...profile.stats,
+        ]}
+      />
 
-      <section
-        aria-label={`Courses by ${profile.name}`}
-        className="mx-auto max-w-[1232px] px-4 pt-10 pb-14 lg:py-[62px]"
-      >
-        <CourseToolbar
-          filters={filters}
-          sort={sort}
-          itemClassName="text-shuttle-gray-700"
-        />
+      <CourseSearchProvider>
+        <section
+          aria-label={`Courses by ${profile.name}`}
+          className="mx-auto max-w-[1232px] px-4 pt-10 pb-14 lg:py-[62px]"
+        >
+          <CoursesToolbar
+            filterLabel={data.filterLabel}
+            price={data.price}
+            rating={data.rating}
+            level={data.level}
+            categoryLabel={data.categoryLabel}
+            allCategoriesLabel={data.allCategoriesLabel}
+            sortOptions={data.sortOptions}
+            clearLabel={data.clearLabel}
+            categories={categories}
+            icons={toolbarIcons}
+            buttonClassName="text-shuttle-gray-700"
+          />
 
-        {courses.length > 0 ? (
-          <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-            {courses.map((course) => (
-              <li key={course.title}>
-                <CourseCard course={course} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="py-16 text-center text-lg leading-[1.6] text-shuttle-gray-400">
-            {emptyMessage}
-          </p>
-        )}
-      </section>
+          <ResultsPane>
+            {courses.length > 0 ? (
+              <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+                {courses.map((course) => (
+                  <li key={course.slug}>
+                    <CourseCard course={course} />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="flex flex-col items-center gap-4 py-16 text-center">
+                <p className="text-lg leading-[1.6] text-shuttle-gray-400">
+                  {own.length > 0 ? noResults : emptyMessage}
+                </p>
+                {isFiltered && <ClearAllButton label={data.clearAllLabel} />}
+              </div>
+            )}
+          </ResultsPane>
+        </section>
+      </CourseSearchProvider>
     </main>
   );
 }
