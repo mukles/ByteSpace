@@ -158,7 +158,8 @@ export interface CoursesPageData {
   categories: string[];
   /** Cards per page in the design's grid */
   pageSize: number;
-  pagination: { current: number; total: number };
+  pagination: { total: number };
+  noResults: string;
 }
 
 export interface IconLabel {

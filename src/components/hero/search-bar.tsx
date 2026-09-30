@@ -6,6 +6,8 @@ interface SearchBarProps {
   label: string;
   /** Renders the button as a scope dropdown (label + chevron) instead of a submit button */
   scope?: boolean;
+  /** Prefills the input, e.g. with the current query */
+  defaultValue?: string;
   className?: string;
 }
 
@@ -13,6 +15,7 @@ export function SearchBar({
   placeholder,
   label,
   scope,
+  defaultValue,
   className,
 }: SearchBarProps) {
   return (
@@ -30,6 +33,7 @@ export function SearchBar({
         <input
           type="search"
           name="q"
+          defaultValue={defaultValue}
           placeholder={placeholder}
           className="w-full min-w-0 bg-transparent text-base leading-[1.6] text-shuttle-gray-950 outline-none placeholder:text-shuttle-gray-400 sm:text-lg"
         />
