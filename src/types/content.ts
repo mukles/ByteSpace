@@ -26,7 +26,6 @@ export interface HeroData {
 
 export interface Course {
   title: string;
-  /** URL segment for /courses/[slug]; details come from content/courses/<slug>.md when it exists */
   slug: string;
   image: string;
   category: string;
@@ -133,38 +132,46 @@ export interface AuthFormData {
 export interface AuthPageData {
   intro: { heading: string; body: string };
   form: AuthFormData;
-  /** Login only: "or" divider and social sign-in buttons */
   social?: { divider: string; providers: { name: string; icon: string }[] };
 }
 
 export interface AuthShowcaseData {
-  /** Titles of courses from the course showcase to feature */
   courses: string[];
   happyStudents: HeroData["happyStudents"];
 }
 
 export interface ToolbarButton {
   label: string;
-  /** 24px icon, optional */
   icon?: string;
+}
+
+export interface SelectOption {
+  value: string;
+  label: string;
 }
 
 export interface CoursesPageData {
   heading: string;
   searchPlaceholder: string;
-  scopeLabel: string;
-  filters: ToolbarButton[];
-  sort: ToolbarButton;
+  scopes: SelectOption[];
+  filterLabel: string;
+  price: { heading: string; anyLabel: string; options: SelectOption[] };
+  rating: { heading: string; anyLabel: string; options: SelectOption[] };
+  level: { label: string; options: SelectOption[] };
+  categoryLabel: string;
+  allCategoriesLabel: string;
+  sortOptions: SelectOption[];
   categories: string[];
-  /** Cards per page in the design's grid */
   pageSize: number;
-  pagination: { total: number };
+  clearLabel: string;
+  clearAllLabel: string;
+  resultsLabel: string;
+  resultsLabelOne: string;
   noResults: string;
 }
 
 export interface IconLabel {
   label: string;
-  /** 24px icon */
   icon: string;
 }
 
@@ -208,7 +215,6 @@ export interface CourseDetailsData {
     content: string;
     progressHeading: string;
     progressIntro: string;
-    /** Percentage, 0–100 */
     progress: { label: string; value: number };
   };
   reviews: {

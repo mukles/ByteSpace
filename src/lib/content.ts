@@ -11,7 +11,9 @@ import type {
 
 const ROOT = process.cwd();
 
-export function readMd<T = Record<string, unknown>>(filePath: string): MdFile<T> {
+export function readMd<T = Record<string, unknown>>(
+  filePath: string,
+): MdFile<T> {
   const abs = path.join(ROOT, "content", `${filePath}.md`);
   const raw = fs.readFileSync(abs, "utf-8");
   const { data, content } = matter(raw);
@@ -20,7 +22,11 @@ export function readMd<T = Record<string, unknown>>(filePath: string): MdFile<T>
 
 export function getPageMeta(slug: string): PageMeta {
   const { data } = readMd<PageMeta>(`pages/${slug}`);
-  return { title: data.title ?? slug, description: data.description ?? "", slug };
+  return {
+    title: data.title ?? slug,
+    description: data.description ?? "",
+    slug,
+  };
 }
 
 export function getAllPages(): PageMeta[] {
@@ -31,16 +37,18 @@ export function getAllPages(): PageMeta[] {
     .map((f) => getPageMeta(f.replace(/\.md$/, "")));
 }
 
-function getCatalog() {
-  return readMd<CourseShowcaseData>("pages/course-showcase").data.courses;
+export function getCatalog() {
+  const featured = readMd<CourseShowcaseData>("pages/course-showcase").data;
+  const extra = readMd<{ courses: CourseShowcaseData["courses"] }>(
+    "catalog",
+  ).data;
+  return [...featured.courses, ...extra.courses];
 }
 
 export function getCourseSlugs(): string[] {
   return getCatalog().map((course) => course.slug);
 }
 
-// Only some courses have their own details file; the rest reuse this one
-// with the catalogue card's details swapped in
 const TEMPLATE_COURSE = "build-digital-asset";
 
 export function getCourseDetails(slug: string): CourseDetailsData | null {
