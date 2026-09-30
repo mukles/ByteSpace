@@ -140,11 +140,6 @@ export interface AuthShowcaseData {
   happyStudents: HeroData["happyStudents"];
 }
 
-export interface ToolbarButton {
-  label: string;
-  icon?: string;
-}
-
 export interface SelectOption {
   value: string;
   label: string;
@@ -247,12 +242,13 @@ export interface CreatorProfileData {
   tagline: string;
   avatar: string;
   bio: string[];
+  productsLabel: string;
   stats: { value: string; label: string }[];
   followLabel: string;
   followingLabel: string;
-  filters: ToolbarButton[];
-  sort: ToolbarButton;
+  toolbarIcons: { filter: string; level: string; category: string; sort: string };
   emptyMessage: string;
+  noResults: string;
 }
 
 export interface NotFoundData {
