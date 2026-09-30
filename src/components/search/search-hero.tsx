@@ -6,12 +6,13 @@ import type { CoursesPageData } from "@/types/content";
 type SearchHeroProps = Pick<
   CoursesPageData,
   "heading" | "searchPlaceholder" | "scopeLabel"
->;
+> & { query?: string };
 
 export function SearchHero({
   heading,
   searchPlaceholder,
   scopeLabel,
+  query,
 }: SearchHeroProps) {
   return (
     <section className="relative isolate overflow-hidden bg-primary">
@@ -38,6 +39,7 @@ export function SearchHero({
           placeholder={searchPlaceholder}
           label={scopeLabel}
           scope
+          defaultValue={query}
           className="max-w-[621px]"
         />
       </div>

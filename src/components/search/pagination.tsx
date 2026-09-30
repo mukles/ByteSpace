@@ -12,6 +12,8 @@ interface PaginationProps {
 }
 
 export function Pagination({ current, total, href }: PaginationProps) {
+  if (total <= 1) return null;
+
   const pages = Array.from({ length: total }, (_, i) => i + 1);
   const hasPrev = current > 1;
   const hasNext = current < total;

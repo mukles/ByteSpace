@@ -20,7 +20,8 @@ categories:
   - "Creative Marketing"
   - "Cooking"
 pageSize: 18
+# Placeholder result pages, filled by repeating the catalogue, until real search exists
 pagination:
-  current: 1
   total: 5
+noResults: "No courses match your search. Try a different keyword."
 ---
