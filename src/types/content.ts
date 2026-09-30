@@ -63,6 +63,56 @@ export interface LearningPathsData {
   categories: { name: string; icon: string; href: string }[];
 }
 
+export interface StatCardData {
+  label: string;
+  period: string;
+  amount: string;
+  change: string;
+}
+
+export interface GrowthData {
+  learner: {
+    heading: string;
+    body: string;
+    stats: { value: string; label: string }[];
+    progress: HeroData["progress"];
+  };
+  creator: {
+    heading: string;
+    brand: string;
+    body: string;
+    features: string[];
+    revenue: StatCardData & { progress: number };
+    yearToDate: StatCardData;
+    happyStudents: HeroData["happyStudents"];
+  };
+}
+
+export interface CreatorCtaData {
+  heading: string;
+  body: string;
+  cta: NavLink;
+}
+
+export interface TestimonialsData {
+  heading: string;
+  body: string;
+  testimonials: { name: string; role: string; avatar: string; quote: string }[];
+}
+
+export interface FooterData {
+  tagline: string;
+  newsletter: {
+    placeholder: string;
+    button: string;
+    success: string;
+    disclaimer: string;
+  };
+  columns: { title: string; links: NavLink[] }[];
+  copyright: string;
+  legal: NavLink[];
+}
+
 export interface AuthField {
   name: string;
   label: string;
