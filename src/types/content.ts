@@ -60,3 +60,28 @@ export interface LearningPathsData {
   subheading: string;
   categories: { name: string; icon: string; href: string }[];
 }
+
+export interface StatCardData {
+  label: string;
+  period: string;
+  amount: string;
+  change: string;
+}
+
+export interface GrowthData {
+  learner: {
+    heading: string;
+    body: string;
+    stats: { value: string; label: string }[];
+    progress: HeroData["progress"];
+  };
+  creator: {
+    heading: string;
+    brand: string;
+    body: string;
+    features: string[];
+    revenue: StatCardData & { progress: number };
+    yearToDate: StatCardData;
+    happyStudents: HeroData["happyStudents"];
+  };
+}

@@ -34,6 +34,7 @@
   --color-accent-dark: var(--color-electric-violet-950);
   --color-accent-foreground: var(--color-white);
 
+  --color-surface: #fafafa;
   --color-border: #e4e4e4;
   --color-border-dark: rgba(255, 255, 255, 0.12);
   --color-star: #facc15;

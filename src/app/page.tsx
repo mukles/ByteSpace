@@ -1,4 +1,5 @@
 import { CourseShowcase } from "@/components/courses/course-showcase";
+import { Growth } from "@/components/growth/growth";
 import { Hero } from "@/components/hero/hero";
 import { LearningPaths } from "@/components/learning-paths/learning-paths";
 import { Partners } from "@/components/partners/partners";
@@ -17,6 +18,7 @@ export default function HomePage() {
       <Partners />
       <CourseShowcase />
       <LearningPaths />
+      <Growth />
     </main>
   );
 }
