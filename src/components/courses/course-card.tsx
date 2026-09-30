@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/components/ui/heading";
+import { cn } from "@/lib/utils";
 import type { Course } from "@/types/content";
 
 const AVATARS = Array.from(
@@ -11,9 +12,39 @@ const AVATARS = Array.from(
 const statChipClass =
   "rounded-[24px] bg-[rgba(246,246,246,0.6)] px-3 py-1.5 text-xs leading-[1.2] font-medium text-black-700 backdrop-blur-[4px]";
 
-export function CourseCard({ course }: { course: Course }) {
+const VARIANTS = {
+  default: {
+    star: "/images/courses/star.svg",
+    bubble: "/images/courses/count-bubble.svg",
+    bubbleText: "text-shuttle-gray-950",
+  },
+  highlight: {
+    star: "/images/courses/star-lime.svg",
+    bubble: "/images/courses/count-bubble-dark.svg",
+    bubbleText: "text-white",
+  },
+} as const;
+
+interface CourseCardProps {
+  course: Course;
+  variant?: keyof typeof VARIANTS;
+  className?: string;
+}
+
+export function CourseCard({
+  course,
+  variant = "default",
+  className,
+}: CourseCardProps) {
+  const v = VARIANTS[variant];
+
   return (
-    <article className="group relative flex flex-col gap-[21px] overflow-hidden rounded-[24px] border border-shuttle-gray-200 bg-white p-[15px] pb-[22px] transition-shadow duration-300 hover:shadow-card-hover">
+    <article
+      className={cn(
+        "group relative flex flex-col gap-[21px] overflow-hidden rounded-[24px] border border-shuttle-gray-200 bg-white p-[15px] pb-[22px] transition-shadow duration-300 hover:shadow-card-hover",
+        className,
+      )}
+    >
       <div className="relative aspect-[341/195] overflow-hidden rounded-xl bg-[#443131]">
         <Image
           src={course.image}
@@ -38,7 +69,6 @@ export function CourseCard({ course }: { course: Course }) {
               balance={false}
               className="truncate leading-[1.2] text-black-950"
             >
-              {/* Stretched link makes the whole card clickable */}
               <Link
                 href="/courses"
                 className="after:absolute after:inset-0 focus-visible:outline-none after:rounded-[24px] focus-visible:after:ring-2 focus-visible:after:ring-primary"
@@ -52,12 +82,7 @@ export function CourseCard({ course }: { course: Course }) {
           </div>
           <p className="flex shrink-0 items-center text-lg leading-[1.6] text-black-700">
             {course.rating}&nbsp;
-            <Image
-              src="/images/courses/star.svg"
-              alt=""
-              width={24}
-              height={24}
-            />
+            <Image src={v.star} alt="" width={24} height={24} />
             <span className="sr-only"> out of 5</span>
           </p>
         </div>
@@ -85,13 +110,18 @@ export function CourseCard({ course }: { course: Course }) {
             ))}
             <span className="relative grid size-8 shrink-0 place-items-center">
               <Image
-                src="/images/courses/count-bubble.svg"
+                src={v.bubble}
                 alt=""
                 width={32}
                 height={32}
                 className="absolute inset-0"
               />
-              <span className="relative text-xs leading-[1.2] font-medium text-shuttle-gray-950">
+              <span
+                className={cn(
+                  "relative text-xs leading-[1.2] font-medium",
+                  v.bubbleText,
+                )}
+              >
                 {course.enrolled}
                 <span className="sr-only"> students enrolled</span>
               </span>

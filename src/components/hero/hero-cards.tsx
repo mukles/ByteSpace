@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import type { HeroData } from "@/types/content";
 
 const AVATARS = Array.from(
@@ -30,13 +31,16 @@ export function CategoryCard({
   );
 }
 
-export function ProgressCard({ label, value }: HeroData["progress"]) {
+// Default positions are the hero stage's; pass `style` to place a card elsewhere
+type Positioned = { style?: CSSProperties };
+
+export function ProgressCard({
+  label,
+  value,
+  style = { left: "calc(50% + 122px)", top: 139 },
+}: HeroData["progress"] & Positioned) {
   return (
-    <div
-      data-hero="card"
-      className={`${cardClass} gap-2`}
-      style={{ left: "calc(50% + 122px)", top: 139 }}
-    >
+    <div data-hero="card" className={`${cardClass} gap-2`} style={style}>
       <p className="text-sm leading-[1.2] font-medium">{label}</p>
       <p
         data-hero="progress-value"
@@ -68,12 +72,13 @@ export function HappyStudentsCard({
   rating,
   reviews,
   count,
-}: HeroData["happyStudents"]) {
+  style = { left: "calc(50% - 392px)", top: 325 },
+}: HeroData["happyStudents"] & Positioned) {
   return (
     <div
       data-hero="card"
       className={`${cardClass} w-[258px] gap-2`}
-      style={{ left: "calc(50% - 392px)", top: 325 }}
+      style={style}
     >
       <div>
         <p className="text-base leading-[1.2] font-medium">{label}</p>
