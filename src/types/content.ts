@@ -85,3 +85,28 @@ export interface GrowthData {
     happyStudents: HeroData["happyStudents"];
   };
 }
+
+export interface CreatorCtaData {
+  heading: string;
+  body: string;
+  cta: NavLink;
+}
+
+export interface TestimonialsData {
+  heading: string;
+  body: string;
+  testimonials: { name: string; role: string; avatar: string; quote: string }[];
+}
+
+export interface FooterData {
+  tagline: string;
+  newsletter: {
+    placeholder: string;
+    button: string;
+    success: string;
+    disclaimer: string;
+  };
+  columns: { title: string; links: NavLink[] }[];
+  copyright: string;
+  legal: NavLink[];
+}
