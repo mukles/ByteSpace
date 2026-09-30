@@ -54,3 +54,9 @@ export interface MdFile<T = Record<string, unknown>> {
   data: T;
   content: string;
 }
+
+export interface LearningPathsData {
+  heading: string;
+  subheading: string;
+  categories: { name: string; icon: string; href: string }[];
+}

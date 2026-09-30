@@ -8,7 +8,7 @@ export function CourseShowcase() {
   const { heading, subheading, ...filter } = data;
 
   return (
-    <section className="bg-white py-14 lg:pt-[72px] lg:pb-20">
+    <section className="bg-white py-14 lg:py-[72px]">
       <div className="mx-auto max-w-[1231px] px-4">
         <div className="flex flex-col items-center gap-4 text-center">
           <Heading
