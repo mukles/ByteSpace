@@ -4,6 +4,7 @@ import { Growth } from "@/components/growth/growth";
 import { Hero } from "@/components/hero/hero";
 import { LearningPaths } from "@/components/learning-paths/learning-paths";
 import { Partners } from "@/components/partners/partners";
+import { Testimonials } from "@/components/testimonials/testimonials";
 import { getPageMeta } from "@/lib/content";
 import type { Metadata } from "next";
 
@@ -21,6 +22,7 @@ export default function HomePage() {
       <LearningPaths />
       <Growth />
       <CreatorCta />
+      <Testimonials />
     </main>
   );
 }
