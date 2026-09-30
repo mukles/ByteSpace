@@ -1,7 +1,13 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import type { MdFile, PageMeta, NavLink } from "@/types/content";
+import type {
+  CourseDetailsData,
+  CourseShowcaseData,
+  MdFile,
+  NavLink,
+  PageMeta,
+} from "@/types/content";
 
 const ROOT = process.cwd();
 
@@ -25,12 +31,41 @@ export function getAllPages(): PageMeta[] {
     .map((f) => getPageMeta(f.replace(/\.md$/, "")));
 }
 
+function getCatalog() {
+  return readMd<CourseShowcaseData>("pages/course-showcase").data.courses;
+}
+
 export function getCourseSlugs(): string[] {
-  const dir = path.join(ROOT, "content/courses");
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.endsWith(".md"))
-    .map((f) => f.replace(/\.md$/, ""));
+  return getCatalog().map((course) => course.slug);
+}
+
+// Only some courses have their own details file; the rest reuse this one
+// with the catalogue card's details swapped in
+const TEMPLATE_COURSE = "build-digital-asset";
+
+export function getCourseDetails(slug: string): CourseDetailsData | null {
+  const course = getCatalog().find((c) => c.slug === slug);
+  if (!course) return null;
+
+  const own = fs.existsSync(path.join(ROOT, "content/courses", `${slug}.md`));
+  const { data } = readMd<CourseDetailsData>(
+    `courses/${own ? slug : TEMPLATE_COURSE}`,
+  );
+  if (own) return data;
+
+  const [level, ...stats] = data.stats;
+  return {
+    ...data,
+    title: course.title,
+    author: course.author,
+    stats: [{ ...level, label: course.level }, ...stats],
+    preview: { ...data.preview, image: course.image },
+    enroll: {
+      ...data.enroll,
+      price: course.price,
+      priceSuffix: course.priceSuffix,
+    },
+  };
 }
 
 export function getNavLinks(): NavLink[] {

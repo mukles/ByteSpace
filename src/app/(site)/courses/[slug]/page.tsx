@@ -5,8 +5,7 @@ import { CourseSidebar } from "@/components/course-details/course-sidebar";
 import { CourseTabs } from "@/components/course-details/course-tabs";
 import { ShareButton } from "@/components/course-details/share-button";
 import { Heading } from "@/components/ui/heading";
-import { getCourseSlugs, readMd } from "@/lib/content";
-import type { CourseDetailsData } from "@/types/content";
+import { getCourseDetails, getCourseSlugs } from "@/lib/content";
 
 export const dynamicParams = false;
 
@@ -16,8 +15,9 @@ export function generateStaticParams() {
 
 async function getCourse(params: PageProps<"/courses/[slug]">["params"]) {
   const { slug } = await params;
-  if (!getCourseSlugs().includes(slug)) notFound();
-  return readMd<CourseDetailsData>(`courses/${slug}`).data;
+  const course = getCourseDetails(slug);
+  if (!course) notFound();
+  return course;
 }
 
 export async function generateMetadata({

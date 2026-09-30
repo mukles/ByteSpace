@@ -26,8 +26,8 @@ export interface HeroData {
 
 export interface Course {
   title: string;
-  /** Matches a file in content/courses when the course has a details page */
-  slug?: string;
+  /** URL segment for /courses/[slug]; details come from content/courses/<slug>.md when it exists */
+  slug: string;
   image: string;
   category: string;
   author: string;
