@@ -97,3 +97,16 @@ export interface TestimonialsData {
   body: string;
   testimonials: { name: string; role: string; avatar: string; quote: string }[];
 }
+
+export interface FooterData {
+  tagline: string;
+  newsletter: {
+    placeholder: string;
+    button: string;
+    success: string;
+    disclaimer: string;
+  };
+  columns: { title: string; links: NavLink[] }[];
+  copyright: string;
+  legal: NavLink[];
+}
