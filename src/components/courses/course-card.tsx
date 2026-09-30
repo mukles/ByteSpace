@@ -70,7 +70,7 @@ export function CourseCard({
               className="truncate leading-[1.2] text-black-950"
             >
               <Link
-                href="/courses"
+                href={course.slug ? `/courses/${course.slug}` : "/courses"}
                 className="after:absolute after:inset-0 focus-visible:outline-none after:rounded-[24px] focus-visible:after:ring-2 focus-visible:after:ring-primary"
               >
                 {course.title}

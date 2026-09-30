@@ -25,6 +25,14 @@ export function getAllPages(): PageMeta[] {
     .map((f) => getPageMeta(f.replace(/\.md$/, "")));
 }
 
+export function getCourseSlugs(): string[] {
+  const dir = path.join(ROOT, "content/courses");
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => f.replace(/\.md$/, ""));
+}
+
 export function getNavLinks(): NavLink[] {
   const { data } = readMd<{ links: NavLink[] }>("navigation");
   return data.links ?? [];

@@ -37,6 +37,7 @@ courses:
     price: "$25"
     priceSuffix: "/lifetime"
   - title: "Build Digital Asset"
+    slug: "build-digital-asset"
     image: "/images/courses/course-2.jpg"
     category: "Graphic Design"
     author: "purepearl studio"

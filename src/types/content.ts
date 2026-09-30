@@ -26,6 +26,8 @@ export interface HeroData {
 
 export interface Course {
   title: string;
+  /** Matches a file in content/courses when the course has a details page */
+  slug?: string;
   image: string;
   category: string;
   author: string;
@@ -107,4 +109,46 @@ export interface CoursesPageData {
   /** Cards per page in the design's grid */
   pageSize: number;
   pagination: { current: number; total: number };
+}
+
+export interface IconLabel {
+  label: string;
+  /** 24px icon */
+  icon: string;
+}
+
+export interface CourseLesson {
+  title: string;
+  duration: string;
+}
+
+export interface CourseDetailsData {
+  title: string;
+  subtitle: string;
+  description: string;
+  author: string;
+  stats: IconLabel[];
+  shareLabel: string;
+  preview: { image: string; playLabel: string };
+  tabs: string[];
+  about: {
+    descriptionHeading: string;
+    description: string[];
+    sneakPeekHeading: string;
+    sneakPeek: string[];
+    keyPointsHeading: string;
+    keyPoints: string[];
+  };
+  reviewsEmpty: string;
+  lessons: { heading: string; items: CourseLesson[]; more: string };
+  enroll: { pitch: string; price: string; priceSuffix: string; cta: string };
+  includes: { heading: string; items: IconLabel[] };
+  creator: {
+    name: string;
+    role: string;
+    avatar: string;
+    bio: string;
+    profileLabel: string;
+    profileHref: string;
+  };
 }
