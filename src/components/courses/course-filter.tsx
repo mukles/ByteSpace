@@ -8,13 +8,12 @@ import { CourseCard } from "./course-card";
 
 type CourseFilterProps = Pick<
   CourseShowcaseData,
-  | "featuredLabel"
-  | "moreLabel"
-  | "moreHref"
-  | "emptyMessage"
-  | "categories"
-  | "courses"
->;
+  "featuredLabel" | "emptyMessage" | "categories" | "courses"
+> &
+  Partial<Pick<CourseShowcaseData, "moreLabel" | "moreHref">> & {
+    /** Overrides the tab row layout (e.g. a single justified row) */
+    tabsClassName?: string;
+  };
 
 export function CourseFilter({
   featuredLabel,
@@ -23,6 +22,7 @@ export function CourseFilter({
   emptyMessage,
   categories,
   courses,
+  tabsClassName,
 }: CourseFilterProps) {
   const [active, setActive] = useState(featuredLabel);
 
@@ -36,7 +36,10 @@ export function CourseFilter({
       <div
         role="group"
         aria-label="Course categories"
-        className="-mx-4 mt-10 flex items-center gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-auto md:max-w-[1100px] md:flex-wrap md:justify-center md:gap-x-4 md:gap-y-5 md:overflow-visible md:px-0 md:pb-0 lg:mt-[42px]"
+        className={cn(
+          "-mx-4 mt-10 flex items-center gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-auto md:max-w-[1100px] md:flex-wrap md:justify-center md:gap-x-4 md:gap-y-5 md:overflow-visible md:px-0 md:pb-0 lg:mt-[42px]",
+          tabsClassName,
+        )}
       >
         {[featuredLabel, ...categories].map((category) => {
           const isActive = category === active;
@@ -57,19 +60,21 @@ export function CourseFilter({
             </button>
           );
         })}
-        <Link
-          href={moreHref}
-          className="shrink-0 whitespace-nowrap text-base leading-[1.2] font-medium text-primary hover:underline"
-        >
-          {moreLabel}
-        </Link>
+        {moreLabel && moreHref && (
+          <Link
+            href={moreHref}
+            className="shrink-0 whitespace-nowrap text-base leading-[1.2] font-medium text-primary hover:underline"
+          >
+            {moreLabel}
+          </Link>
+        )}
       </div>
 
       <div aria-live="polite" className="mt-12 lg:mt-[77px]">
         {visible.length > 0 ? (
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-            {visible.map((course) => (
-              <li key={course.title}>
+            {visible.map((course, i) => (
+              <li key={`${course.title}-${i}`}>
                 <CourseCard course={course} />
               </li>
             ))}

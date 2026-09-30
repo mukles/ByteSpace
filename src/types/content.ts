@@ -110,3 +110,65 @@ export interface FooterData {
   copyright: string;
   legal: NavLink[];
 }
+
+export interface AuthField {
+  name: string;
+  label: string;
+  type: "text" | "email" | "password";
+  placeholder: string;
+  autoComplete: string;
+}
+
+export interface AuthFormData {
+  eyebrow: string;
+  heading: string;
+  fields: AuthField[];
+  submit: string;
+  prompt: string;
+  promptLink: NavLink;
+}
+
+export interface AuthPageData {
+  intro: { heading: string; body: string };
+  form: AuthFormData;
+  /** Login only: "or" divider and social sign-in buttons */
+  social?: { divider: string; providers: { name: string; icon: string }[] };
+}
+
+export interface AuthShowcaseData {
+  /** Titles of courses from the course showcase to feature */
+  courses: string[];
+  happyStudents: HeroData["happyStudents"];
+}
+
+export interface ToolbarButton {
+  label: string;
+  /** 24px icon, optional */
+  icon?: string;
+}
+
+export interface CoursesPageData {
+  heading: string;
+  searchPlaceholder: string;
+  scopeLabel: string;
+  filters: ToolbarButton[];
+  sort: ToolbarButton;
+  categories: string[];
+  /** Cards per page in the design's grid */
+  pageSize: number;
+  pagination: { current: number; total: number };
+}
+
+export interface CreatorProfileData {
+  name: string;
+  badge: string;
+  tagline: string;
+  avatar: string;
+  bio: string[];
+  stats: { value: string; label: string }[];
+  followLabel: string;
+  followingLabel: string;
+  filters: ToolbarButton[];
+  sort: ToolbarButton;
+  emptyMessage: string;
+}
