@@ -61,7 +61,7 @@ export interface LearningPathsData {
   categories: { name: string; icon: string; href: string }[];
 }
 
-export interface SignupField {
+export interface AuthField {
   name: string;
   label: string;
   type: "text" | "email" | "password";
@@ -69,19 +69,24 @@ export interface SignupField {
   autoComplete: string;
 }
 
-export interface SignupData {
+export interface AuthFormData {
+  eyebrow: string;
+  heading: string;
+  fields: AuthField[];
+  submit: string;
+  prompt: string;
+  promptLink: NavLink;
+}
+
+export interface AuthPageData {
   intro: { heading: string; body: string };
-  form: {
-    eyebrow: string;
-    heading: string;
-    fields: SignupField[];
-    submit: string;
-    loginPrompt: string;
-    login: NavLink;
-  };
-  showcase: {
-    /** Titles of courses from the course showcase to feature */
-    courses: string[];
-    happyStudents: HeroData["happyStudents"];
-  };
+  form: AuthFormData;
+  /** Login only: "or" divider and social sign-in buttons */
+  social?: { divider: string; providers: { name: string; icon: string }[] };
+}
+
+export interface AuthShowcaseData {
+  /** Titles of courses from the course showcase to feature */
+  courses: string[];
+  happyStudents: HeroData["happyStudents"];
 }

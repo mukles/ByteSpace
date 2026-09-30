@@ -1,25 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import type { SubmitEvent } from "react";
+import type { ReactNode, SubmitEvent } from "react";
 import { Heading } from "@/components/ui/heading";
-import type { SignupData } from "@/types/content";
+import { cn } from "@/lib/utils";
+import type { AuthFormData } from "@/types/content";
 
 // Design-only for now: submitting is a no-op until auth is wired up
 function preventSubmit(event: SubmitEvent<HTMLFormElement>) {
   event.preventDefault();
 }
 
-export function SignupForm({
+interface AuthFormProps extends AuthFormData {
+  /** Extra content between the form and the footer prompt (e.g. social sign-in) */
+  children?: ReactNode;
+  promptClassName?: string;
+}
+
+export function AuthForm({
   eyebrow,
   heading,
   fields,
   submit,
-  loginPrompt,
-  login,
-}: SignupData["form"]) {
+  prompt,
+  promptLink,
+  children,
+  promptClassName,
+}: AuthFormProps) {
   return (
-    <div className="flex w-full flex-col items-center gap-16 rounded-[24px] bg-white px-6 py-10 text-shuttle-gray-950 sm:px-[63px] sm:pt-[61px] sm:pb-[53px] lg:gap-[122px]">
+    <div
+      className={cn(
+        "flex w-full flex-col items-center rounded-[24px] bg-white px-6 py-10 text-shuttle-gray-950 sm:px-[63px] sm:pt-[61px]",
+        // With a middle section the content spreads over the full card height
+        children
+          ? "gap-10 sm:h-[784px] sm:justify-between sm:pb-10"
+          : "gap-16 sm:pb-[53px] lg:gap-[122px]",
+      )}
+    >
       <div className="flex w-full flex-col gap-10">
         <div>
           <p className="text-lg leading-[1.6] text-primary">{eyebrow}</p>
@@ -40,13 +57,13 @@ export function SignupForm({
           {fields.map((field) => (
             <div key={field.name} className="flex w-full flex-col gap-2">
               <label
-                htmlFor={`signup-${field.name}`}
+                htmlFor={`auth-${field.name}`}
                 className="text-sm leading-[1.2] font-medium"
               >
                 {field.label}
               </label>
               <input
-                id={`signup-${field.name}`}
+                id={`auth-${field.name}`}
                 name={field.name}
                 type={field.type}
                 placeholder={field.placeholder}
@@ -65,10 +82,17 @@ export function SignupForm({
         </form>
       </div>
 
-      <p className="flex gap-1 text-base leading-[1.6] text-shuttle-gray-700">
-        {loginPrompt}
-        <Link href={login.href} className="text-primary hover:underline">
-          {login.label}
+      {children}
+
+      <p
+        className={cn(
+          "flex flex-wrap justify-center gap-1 text-base leading-[1.6] text-shuttle-gray-700",
+          promptClassName,
+        )}
+      >
+        {prompt}
+        <Link href={promptLink.href} className="text-primary hover:underline">
+          {promptLink.label}
         </Link>
       </p>
     </div>
