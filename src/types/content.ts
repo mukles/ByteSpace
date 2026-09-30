@@ -183,3 +183,17 @@ export interface CourseDetailsData {
     profileHref: string;
   };
 }
+
+export interface CreatorProfileData {
+  name: string;
+  badge: string;
+  tagline: string;
+  avatar: string;
+  bio: string[];
+  stats: { value: string; label: string }[];
+  followLabel: string;
+  followingLabel: string;
+  filters: ToolbarButton[];
+  sort: ToolbarButton;
+  emptyMessage: string;
+}
