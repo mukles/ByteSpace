@@ -1,0 +1,59 @@
+@theme {
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-clash-display), ui-sans-serif, system-ui, sans-serif;
+
+  --color-persian-blue-800: #003be2;
+  --color-electric-lime-400: #d4fb20;
+  --color-electric-lime-500: #cbfc01;
+  --color-electric-violet-600: #7f30f7;
+  --color-electric-violet-950: #300b6a;
+
+  --color-shuttle-gray-50: #f5f5f6;
+  --color-shuttle-gray-100: #e5e6e8;
+  --color-shuttle-gray-200: #ced0d3;
+  --color-shuttle-gray-300: #abaeb5;
+  --color-shuttle-gray-400: #82868e;
+  --color-shuttle-gray-700: #4b4c53;
+  --color-shuttle-gray-900: #3a3b3f;
+  --color-shuttle-gray-950: #242528;
+
+  --color-mirage-950: #040819;
+
+  --color-black-700: #4f4f4f;
+  --color-black-950: #000000;
+  --color-white: #ffffff;
+
+  /* Semantic */
+  --color-primary: var(--color-persian-blue-800);
+  --color-primary-foreground: var(--color-white);
+  --color-secondary: var(--color-electric-lime-400);
+  --color-secondary-hover: var(--color-electric-lime-500);
+  --color-secondary-foreground: var(--color-black-950);
+  --color-accent: var(--color-electric-violet-600);
+  --color-accent-dark: var(--color-electric-violet-950);
+  --color-accent-foreground: var(--color-white);
+
+  --color-border: #e4e4e4;
+  --color-border-dark: rgba(255, 255, 255, 0.12);
+  --color-star: #facc15;
+
+  --shadow-card:
+    0px 1px 3px rgba(0, 0, 0, 0.04), 0px 3px 6px rgba(0, 0, 0, 0.06),
+    0px 5px 10px rgba(0, 0, 0, 0.07), 0px 10px 16px rgba(0, 0, 0, 0.08);
+
+  --shadow-card-hover:
+    0px 5px 10px rgba(0, 0, 0, 0.06), 0px 17px 24px rgba(0, 0, 0, 0.08),
+    0px 37px 56px rgba(0, 0, 0, 0.1), 0px 51px 73px rgba(0, 0, 0, 0.13);
+
+  /* Figma effect "A" — a drop-shadow so it follows transparent images */
+  --drop-shadow-elevated:
+    0.52px 0.74px 3.04px rgba(0, 0, 0, 0.04),
+    2.23px 3.19px 5.72px rgba(0, 0, 0, 0.06),
+    5.38px 7.69px 9.57px rgba(0, 0, 0, 0.07),
+    10.21px 14.58px 16.09px rgba(0, 0, 0, 0.08),
+    16.95px 24.21px 24px rgba(0, 0, 0, 0.09),
+    25.84px 36.91px 36px rgba(0, 0, 0, 0.1),
+    37.12px 53.03px 56px rgba(0, 0, 0, 0.11),
+    51.04px 72.91px 72px rgba(0, 0, 0, 0.13);
+}

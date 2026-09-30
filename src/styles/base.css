@@ -1,0 +1,13 @@
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply text-base md:scroll-smooth;
+  }
+
+  body {
+    @apply font-body;
+  }
+}
