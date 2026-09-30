@@ -122,6 +122,15 @@ export interface CourseLesson {
   duration: string;
 }
 
+export interface CourseReview {
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+  date: string;
+  body: string;
+}
+
 export interface CourseDetailsData {
   title: string;
   subtitle: string;
@@ -139,7 +148,29 @@ export interface CourseDetailsData {
     keyPointsHeading: string;
     keyPoints: string[];
   };
-  reviewsEmpty: string;
+  curriculum: {
+    modulesHeading: string;
+    modulesIntro: string;
+    listHeading: string;
+    modules: { title: string; summary: string }[];
+    contentHeading: string;
+    content: string;
+    progressHeading: string;
+    progressIntro: string;
+    /** Percentage, 0–100 */
+    progress: { label: string; value: number };
+  };
+  reviews: {
+    heading: string;
+    intro: string;
+    ratingLabel: string;
+    rating: string;
+    breakdown: { stars: number; count: number; percent: number }[];
+    listHeading: string;
+    allLabel: string;
+    emptyMessage: string;
+    items: CourseReview[];
+  };
   lessons: { heading: string; items: CourseLesson[]; more: string };
   enroll: { pitch: string; price: string; priceSuffix: string; cta: string };
   includes: { heading: string; items: IconLabel[] };

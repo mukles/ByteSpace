@@ -5,14 +5,14 @@ import { useId, useState } from "react";
 import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
 import type { CourseDetailsData } from "@/types/content";
-import { LessonList } from "./lesson-list";
+import { ReviewsPanel } from "./reviews-panel";
 
 const sectionHeadingClass = "leading-[1.2]";
 const bodyClass = "text-base leading-[1.6] text-shuttle-gray-700";
 
 type CourseTabsProps = Pick<
   CourseDetailsData,
-  "tabs" | "about" | "lessons" | "reviewsEmpty"
+  "tabs" | "about" | "curriculum" | "reviews"
 >;
 
 function AboutPanel({ about }: Pick<CourseDetailsData, "about">) {
@@ -69,21 +69,85 @@ function AboutPanel({ about }: Pick<CourseDetailsData, "about">) {
   );
 }
 
-export function CourseTabs({ tabs, about, lessons, reviewsEmpty }: CourseTabsProps) {
+function LessonsPanel({ curriculum }: Pick<CourseDetailsData, "curriculum">) {
+  const { progress } = curriculum;
+
+  return (
+    <div className="flex flex-col gap-6">
+      <Heading as="h2" size="heading-xs" className={sectionHeadingClass}>
+        {curriculum.modulesHeading}
+      </Heading>
+      <p className={bodyClass}>{curriculum.modulesIntro}</p>
+
+      <Heading as="h2" size="heading-xs" className={sectionHeadingClass}>
+        {curriculum.listHeading}
+      </Heading>
+      <ol className="flex flex-col gap-6">
+        {curriculum.modules.map((module) => (
+          <li key={module.title} className="flex items-center gap-[13px]">
+            <span className="flex shrink-0 items-center justify-center rounded-[24px] bg-secondary p-4">
+              <Image
+                src="/images/course-details/lesson-video.svg"
+                alt=""
+                width={40}
+                height={40}
+              />
+            </span>
+            <div className="flex flex-col gap-1 text-base">
+              <h3 className="leading-[1.2] font-medium text-shuttle-gray-950">
+                {module.title}
+              </h3>
+              <p className="max-w-[638px] leading-[1.6] text-shuttle-gray-700">
+                {module.summary}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <Heading as="h2" size="heading-xs" className={sectionHeadingClass}>
+        {curriculum.contentHeading}
+      </Heading>
+      <p className={bodyClass}>{curriculum.content}</p>
+
+      <Heading as="h2" size="heading-xs" className={sectionHeadingClass}>
+        {curriculum.progressHeading}
+      </Heading>
+      <p className={bodyClass}>{curriculum.progressIntro}</p>
+
+      <div className="flex flex-col gap-2 rounded-2xl border border-shuttle-gray-200 bg-white p-4 backdrop-blur-[10px]">
+        <p className="text-sm leading-[1.2] font-medium text-shuttle-gray-950">
+          {progress.label}
+        </p>
+        <p className="font-heading text-[36px] leading-[1.2] font-semibold tracking-[-0.01em] text-shuttle-gray-950">
+          {progress.value}%
+        </p>
+        <div
+          role="progressbar"
+          aria-label={progress.label}
+          aria-valuenow={progress.value}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          className="h-2 overflow-hidden rounded-[24px] bg-shuttle-gray-100"
+        >
+          <div
+            className="h-full rounded-[24px] bg-secondary"
+            style={{ width: `${progress.value}%` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function CourseTabs({ tabs, about, curriculum, reviews }: CourseTabsProps) {
   const [active, setActive] = useState(0);
   const id = useId();
 
   const panels = [
     <AboutPanel key="about" about={about} />,
-    <div key="lessons" className="flex max-w-[414px] flex-col gap-6">
-      <Heading as="h2" size="heading-xs" className={sectionHeadingClass}>
-        {lessons.heading}
-      </Heading>
-      <LessonList {...lessons} />
-    </div>,
-    <p key="reviews" className={bodyClass}>
-      {reviewsEmpty}
-    </p>,
+    <LessonsPanel key="lessons" curriculum={curriculum} />,
+    <ReviewsPanel key="reviews" reviews={reviews} />,
   ];
 
   return (

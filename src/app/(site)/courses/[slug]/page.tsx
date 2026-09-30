@@ -122,8 +122,8 @@ export default async function CourseDetailsPage({
           <CourseTabs
             tabs={course.tabs}
             about={course.about}
-            lessons={course.lessons}
-            reviewsEmpty={course.reviewsEmpty}
+            curriculum={course.curriculum}
+            reviews={course.reviews}
           />
         </div>
       </div>
