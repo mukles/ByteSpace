@@ -1,4 +1,6 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
+import { cn } from "@/lib/utils";
 import type { HeroData } from "@/types/content";
 
 const AVATARS = Array.from(
@@ -30,13 +32,16 @@ export function CategoryCard({
   );
 }
 
-export function ProgressCard({ label, value }: HeroData["progress"]) {
+// Default positions are the hero stage's; pass `style` to place a card elsewhere
+type Positioned = { style?: CSSProperties };
+
+export function ProgressCard({
+  label,
+  value,
+  style = { left: "calc(50% + 122px)", top: 139 },
+}: HeroData["progress"] & Positioned) {
   return (
-    <div
-      data-hero="card"
-      className={`${cardClass} gap-2`}
-      style={{ left: "calc(50% + 122px)", top: 139 }}
-    >
+    <div data-hero="card" className={`${cardClass} gap-2`} style={style}>
       <p className="text-sm leading-[1.2] font-medium">{label}</p>
       <p
         data-hero="progress-value"
@@ -63,26 +68,53 @@ export function ProgressCard({ label, value }: HeroData["progress"]) {
   );
 }
 
+// "lime" is the sign-up variant: lime card, blue star and dark count bubble
+const HAPPY_VARIANTS = {
+  default: {
+    card: "",
+    label: "leading-[1.2]",
+    rating: "text-xs leading-[1.6]",
+    reviews: "text-shuttle-gray-400",
+    star: "/images/hero/star.svg",
+    bubble: "/images/hero/count-bubble.svg",
+    bubbleText: "",
+  },
+  lime: {
+    card: "bg-secondary",
+    label: "leading-6",
+    rating: "text-[10px] leading-[1.5] font-bold",
+    reviews: "font-normal text-shuttle-gray-800",
+    star: "/images/hero/star-blue.svg",
+    bubble: "/images/hero/count-bubble-dark.svg",
+    bubbleText: "text-shuttle-gray-50",
+  },
+} as const;
+
 export function HappyStudentsCard({
   label,
   rating,
   reviews,
   count,
-}: HeroData["happyStudents"]) {
+  variant = "default",
+  style = { left: "calc(50% - 392px)", top: 325 },
+}: HeroData["happyStudents"] &
+  Positioned & { variant?: keyof typeof HAPPY_VARIANTS }) {
+  const v = HAPPY_VARIANTS[variant];
+
   return (
     <div
       data-hero="card"
-      className={`${cardClass} w-[258px] gap-2`}
-      style={{ left: "calc(50% - 392px)", top: 325 }}
+      className={cn(cardClass, "w-[258px] gap-2", v.card)}
+      style={style}
     >
       <div>
-        <p className="text-base leading-[1.2] font-medium">{label}</p>
-        <p className="flex items-center text-xs leading-[1.6]">
+        <p className={cn("text-base font-medium", v.label)}>{label}</p>
+        <p className={cn("flex items-center", v.rating)}>
           {rating}&nbsp;
-          <span className="text-shuttle-gray-400">{reviews}</span>
+          <span className={v.reviews}>{reviews}</span>
           <span className="relative ml-0.5 size-4">
             <Image
-              src="/images/hero/star.svg"
+              src={v.star}
               alt=""
               width={13.16}
               height={12.57}
@@ -105,13 +137,18 @@ export function HappyStudentsCard({
         ))}
         <span className="relative grid size-[43px] shrink-0 place-items-center">
           <Image
-            src="/images/hero/count-bubble.svg"
+            src={v.bubble}
             alt=""
             width={43}
             height={43}
             className="absolute inset-0"
           />
-          <span className="relative text-xs leading-[1.5] font-bold">
+          <span
+            className={cn(
+              "relative text-xs leading-[1.5] font-bold",
+              v.bubbleText,
+            )}
+          >
             {count}
           </span>
         </span>

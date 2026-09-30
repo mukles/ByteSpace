@@ -60,3 +60,28 @@ export interface LearningPathsData {
   subheading: string;
   categories: { name: string; icon: string; href: string }[];
 }
+
+export interface SignupField {
+  name: string;
+  label: string;
+  type: "text" | "email" | "password";
+  placeholder: string;
+  autoComplete: string;
+}
+
+export interface SignupData {
+  intro: { heading: string; body: string };
+  form: {
+    eyebrow: string;
+    heading: string;
+    fields: SignupField[];
+    submit: string;
+    loginPrompt: string;
+    login: NavLink;
+  };
+  showcase: {
+    /** Titles of courses from the course showcase to feature */
+    courses: string[];
+    happyStudents: HeroData["happyStudents"];
+  };
+}
