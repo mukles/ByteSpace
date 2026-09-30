@@ -91,3 +91,9 @@ export interface CreatorCtaData {
   body: string;
   cta: NavLink;
 }
+
+export interface TestimonialsData {
+  heading: string;
+  body: string;
+  testimonials: { name: string; role: string; avatar: string; quote: string }[];
+}
