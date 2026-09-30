@@ -1,4 +1,5 @@
 import { CourseShowcase } from "@/components/courses/course-showcase";
+import { CreatorCta } from "@/components/creator-cta/creator-cta";
 import { Growth } from "@/components/growth/growth";
 import { Hero } from "@/components/hero/hero";
 import { LearningPaths } from "@/components/learning-paths/learning-paths";
@@ -19,6 +20,7 @@ export default function HomePage() {
       <CourseShowcase />
       <LearningPaths />
       <Growth />
+      <CreatorCta />
     </main>
   );
 }

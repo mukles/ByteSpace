@@ -85,3 +85,9 @@ export interface GrowthData {
     happyStudents: HeroData["happyStudents"];
   };
 }
+
+export interface CreatorCtaData {
+  heading: string;
+  body: string;
+  cta: NavLink;
+}
