@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const toolbarButtonClass =
-  "flex min-h-12 shrink-0 cursor-pointer items-center gap-1 rounded-[24px] border border-shuttle-gray-200 bg-white px-4 py-3 text-base leading-[1.2] font-medium whitespace-nowrap text-shuttle-gray-950 transition-colors hover:bg-shuttle-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+export const toolbarButtonClass = cn(
+  buttonVariants({ variant: "outline", size: "tab" }),
+  "min-h-12 justify-start gap-1",
+);
 
 interface ToolbarDropdownProps {
   label: ReactNode;

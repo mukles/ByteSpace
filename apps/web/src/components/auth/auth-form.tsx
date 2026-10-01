@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useActionState, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import type { AuthFormState } from "@/lib/auth/actions";
 import { cn } from "@/lib/utils";
@@ -87,13 +87,13 @@ export function AuthForm({
               {state.error}
             </p>
           )}
-          <button
+          <Button
             type="submit"
             disabled={pending}
-            className="cursor-pointer rounded-[24px] bg-secondary px-6 py-3 text-lg leading-[1.2] font-medium text-shuttle-gray-950 transition-colors hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-70"
+            className="disabled:cursor-wait"
           >
             {submit}
-          </button>
+          </Button>
         </form>
       </div>
 
@@ -106,9 +106,14 @@ export function AuthForm({
         )}
       >
         {prompt}
-        <Link href={promptLink.href} className="text-primary hover:underline">
+        <Button
+          href={promptLink.href}
+          variant="link"
+          size="inline"
+          className="leading-[1.6]"
+        >
           {promptLink.label}
-        </Link>
+        </Button>
       </p>
     </div>
   );

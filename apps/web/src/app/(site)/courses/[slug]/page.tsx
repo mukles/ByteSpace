@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CourseSidebar } from "@/components/course-details/course-sidebar";
 import { CourseTabs } from "@/components/course-details/course-tabs";
 import { ShareButton } from "@/components/course-details/share-button";
+import { Badge } from "@/components/ui/badge";
 import { Heading } from "@/components/ui/heading";
 import { getCourseDetails, getCourseSlugs } from "@/lib/content";
 
@@ -71,13 +72,15 @@ export default async function CourseDetailsPage({
             </p>
             <ul className="flex flex-wrap gap-3 md:gap-4">
               {course.stats.map((stat) => (
-                <li
+                <Badge
+                  as="li"
                   key={stat.label}
-                  className="flex items-center gap-2 rounded-[24px] bg-white px-6 py-2 text-base leading-[1.2] font-medium text-shuttle-gray-950 backdrop-blur-[20px]"
+                  variant="white"
+                  className="backdrop-blur-[20px]"
                 >
                   <Image src={stat.icon} alt="" width={24} height={24} />
                   {stat.label}
-                </li>
+                </Badge>
               ))}
             </ul>
           </div>

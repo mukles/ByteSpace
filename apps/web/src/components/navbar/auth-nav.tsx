@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, useTransition } from "react";
+import { buttonVariants } from "@/components/ui/button";
 import { logout } from "@/lib/auth/actions";
 import type { AuthUser } from "@/lib/auth/types";
 import { cn } from "@/lib/utils";
@@ -74,9 +75,7 @@ export function AuthNav({ variant, onNavigate }: AuthNavProps) {
           disabled={pending}
           className={cn(
             "cursor-pointer text-base leading-6 disabled:cursor-wait disabled:opacity-70",
-            isDesktop
-              ? "hover:text-secondary"
-              : "rounded-[24px] bg-secondary px-6 py-2 font-medium text-shuttle-gray-950 hover:bg-secondary-hover",
+            isDesktop ? "hover:text-secondary" : buttonVariants({ size: "md" }),
           )}
         >
           Sign Out
@@ -96,7 +95,10 @@ export function AuthNav({ variant, onNavigate }: AuthNavProps) {
       <Link
         href="/login"
         onClick={onNavigate}
-        className={cn("text-base", isDesktop && "leading-6 hover:text-secondary")}
+        className={cn(
+          "text-base",
+          isDesktop && "leading-6 hover:text-secondary",
+        )}
       >
         Sign In
       </Link>
@@ -107,7 +109,7 @@ export function AuthNav({ variant, onNavigate }: AuthNavProps) {
           "text-base",
           isDesktop
             ? "leading-6 hover:text-secondary"
-            : "rounded-[24px] bg-secondary px-6 py-2 font-medium text-shuttle-gray-950 hover:bg-secondary-hover",
+            : buttonVariants({ size: "md" }),
         )}
       >
         Join Us

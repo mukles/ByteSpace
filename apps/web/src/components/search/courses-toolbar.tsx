@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useId, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import type { CoursesPageData } from "@/types/content";
 import {
   OptionRow,
@@ -36,9 +37,6 @@ function withIcon(label: ReactNode, icon?: string) {
     </>
   );
 }
-
-const clearClass =
-  "cursor-pointer text-sm leading-[1.2] font-medium text-primary hover:underline disabled:cursor-default disabled:text-shuttle-gray-300 disabled:no-underline";
 
 export function CoursesToolbar({
   filterLabel,
@@ -123,14 +121,15 @@ export function CoursesToolbar({
                 )}
               </fieldset>
               <PanelFooter>
-                <button
-                  type="button"
+                <Button
+                  variant="link"
+                  size="inline"
+                  className="text-sm"
                   disabled={filterCount === 0}
                   onClick={() => update({ price: null, rating: null })}
-                  className={clearClass}
                 >
                   {clearLabel}
-                </button>
+                </Button>
               </PanelFooter>
             </>
           )}
@@ -158,14 +157,15 @@ export function CoursesToolbar({
                 ))}
               </fieldset>
               <PanelFooter>
-                <button
-                  type="button"
+                <Button
+                  variant="link"
+                  size="inline"
+                  className="text-sm"
                   disabled={query.levels.length === 0}
                   onClick={() => update({ level: null })}
-                  className={clearClass}
                 >
                   {clearLabel}
-                </button>
+                </Button>
               </PanelFooter>
             </>
           )}

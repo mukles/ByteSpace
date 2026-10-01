@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { pageWindow } from "@/lib/course-search";
 import { cn } from "@/lib/utils";
-
-const arrowClass =
-  "grid place-items-center rounded-[24px] border border-shuttle-gray-200 bg-white px-4 py-3 transition-colors";
 
 interface PaginationProps {
   current: number;
@@ -30,22 +28,18 @@ function Arrow({
   );
 
   return target ? (
-    <Link
-      href={target}
-      aria-label={label}
-      className={cn(
-        arrowClass,
-        "hover:bg-shuttle-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-      )}
-    >
+    <Button href={target} aria-label={label} variant="outline" size="tab">
       {icon}
-    </Link>
+    </Button>
   ) : (
     <span
       role="link"
       aria-disabled="true"
       aria-label={label}
-      className={cn(arrowClass, "cursor-not-allowed opacity-40")}
+      className={cn(
+        buttonVariants({ variant: "outline", size: "tab" }),
+        "cursor-not-allowed opacity-40 hover:bg-white",
+      )}
     >
       {icon}
     </span>
@@ -65,7 +59,11 @@ export function Pagination({ current, total, href }: PaginationProps) {
       <ol className="flex items-center gap-3 font-heading text-xl leading-7 font-semibold tracking-[-0.01em] sm:gap-6">
         {pageWindow(current, total).map((page, i) =>
           page === null ? (
-            <li key={`gap-${i}`} aria-hidden="true" className="text-shuttle-gray-400">
+            <li
+              key={`gap-${i}`}
+              aria-hidden="true"
+              className="text-shuttle-gray-400"
+            >
               …
             </li>
           ) : (
