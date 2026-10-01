@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { AuthPageData } from "@/types/content";
 
-// Design-only: provider buttons are not wired to any auth flow yet
 export function SocialSignIn({
   divider,
   providers,

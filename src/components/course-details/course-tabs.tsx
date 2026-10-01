@@ -21,7 +21,6 @@ function AboutPanel({ about }: Pick<CourseDetailsData, "about">) {
       <Heading as="h2" size="heading-xs" className={sectionHeadingClass}>
         {about.descriptionHeading}
       </Heading>
-      {/* Paragraphs are separated by one blank line in the design */}
       <div className={cn("flex flex-col gap-[1.6em]", bodyClass)}>
         {about.description.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>

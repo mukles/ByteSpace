@@ -5,7 +5,6 @@ import { Heading } from "@/components/ui/heading";
 import { readMd } from "@/lib/content";
 import type { CreatorCtaData } from "@/types/content";
 
-// Stage coordinates: x is offset from centre, y is from the section top
 const SHAPES = [
   {
     src: "/images/hero/shape-spring.png",
@@ -73,7 +72,6 @@ export function CreatorCta() {
         className="pointer-events-none absolute -top-0.5 left-1/2 -z-10 max-w-none -translate-x-1/2"
       />
 
-      {/* Shapes are laid out at the 1440px design width and scaled down below lg */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[488px] w-[1440px] -translate-1/2 scale-[0.55] md:scale-[0.8] lg:scale-100"

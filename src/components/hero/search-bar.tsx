@@ -6,14 +6,10 @@ import type { SelectOption } from "@/types/content";
 
 interface SearchBarProps {
   placeholder: string;
-  /** Submit button text; unused when `scopes` turns the button into a scope dropdown */
   label?: string;
-  /** Renders a "search in" dropdown instead of a submit button (Enter submits) */
   scopes?: SelectOption[];
   scopeValue?: string;
-  /** Prefills the input, e.g. with the current query */
   defaultValue?: string;
-  /** Other params to carry over, so a new search keeps the active filters */
   hiddenFields?: Record<string, string>;
   className?: string;
 }

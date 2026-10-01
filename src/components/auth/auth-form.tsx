@@ -6,13 +6,11 @@ import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
 import type { AuthFormData } from "@/types/content";
 
-// Design-only for now: submitting is a no-op until auth is wired up
 function preventSubmit(event: SubmitEvent<HTMLFormElement>) {
   event.preventDefault();
 }
 
 interface AuthFormProps extends AuthFormData {
-  /** Extra content between the form and the footer prompt (e.g. social sign-in) */
   children?: ReactNode;
   promptClassName?: string;
 }
@@ -31,7 +29,6 @@ export function AuthForm({
     <div
       className={cn(
         "flex w-full flex-col items-center rounded-[24px] bg-white px-6 py-10 text-shuttle-gray-950 sm:px-[63px] sm:pt-[61px]",
-        // With a middle section the content spreads over the full card height
         children
           ? "gap-10 sm:h-[784px] sm:justify-between sm:pb-10"
           : "gap-16 sm:pb-[53px] lg:gap-[122px]",

@@ -42,10 +42,8 @@ export default async function CreatorProfilePage({
   const { productsLabel, toolbarIcons, emptyMessage, noResults, ...profile } =
     await getCreator(params);
   const query = parseCourseQuery(await searchParams);
-  // The toolbar shares its labels and options with the courses page
   const { data } = readMd<CoursesPageData>("pages/courses");
 
-  // Courses credit their creator by name in the catalogue
   const own = getCatalog().filter(
     (course) => course.author.toLowerCase() === profile.name.toLowerCase(),
   );

@@ -35,13 +35,11 @@ export default async function CourseDetailsPage({
   return (
     <main className="isolate overflow-x-clip">
       <div className="mx-auto grid max-w-[1232px] grid-cols-1 px-4 pb-20 lg:grid-cols-[minmax(0,720px)_414px] lg:justify-between lg:gap-x-8 lg:pb-[120px]">
-        {/* Blue band behind the header and preview, running 62px past the video */}
         <div
           aria-hidden="true"
           className="pointer-events-none relative col-span-full row-start-1 row-end-3 -z-10"
         >
           <div className="absolute top-0 -bottom-10 left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-primary lg:-bottom-[62px]">
-            {/* Offset by the navbar height so the grid runs on from the header */}
             <Image
               src="/images/auth/grid.svg"
               alt=""

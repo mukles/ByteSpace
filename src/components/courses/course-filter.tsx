@@ -11,7 +11,6 @@ type CourseFilterProps = Pick<
   "featuredLabel" | "emptyMessage" | "categories" | "courses"
 > &
   Partial<Pick<CourseShowcaseData, "moreLabel" | "moreHref">> & {
-    /** Overrides the tab row layout (e.g. a single justified row) */
     tabsClassName?: string;
   };
 

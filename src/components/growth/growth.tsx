@@ -61,7 +61,6 @@ function StatCard({
   );
 }
 
-// Visual stages are laid out at their Figma size and scaled down on phones
 const stageWrap = "relative mx-auto shrink-0 lg:mx-0";
 const stage = "absolute top-0 left-0 origin-top-left scale-[0.55] sm:scale-100";
 
@@ -95,7 +94,6 @@ export function Growth() {
       </div>
 
       <div className="mx-auto flex max-w-[1232px] flex-col gap-16 px-4 py-16 lg:gap-[72px] lg:py-[120px]">
-        {/* Learners */}
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-[63px]">
           <div className="flex max-w-[574px] flex-col gap-6 lg:w-[574px] lg:shrink-0 lg:gap-10">
             <Heading as="h2" size="heading-m" balance={false}>
@@ -153,7 +151,6 @@ export function Growth() {
           </div>
         </div>
 
-        {/* Creators */}
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-[79px]">
           <div
             aria-hidden="true"

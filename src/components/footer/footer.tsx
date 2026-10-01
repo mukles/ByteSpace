@@ -33,7 +33,6 @@ export function Footer() {
             <NewsletterForm {...data.newsletter} />
           </div>
 
-          {/* Column titles are hidden in the design; links start 48px down */}
           <nav
             aria-label="Footer"
             className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 lg:w-[580px] lg:pt-12"

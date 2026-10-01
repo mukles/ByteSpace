@@ -32,7 +32,6 @@ export function CategoryCard({
   );
 }
 
-// Default positions are the hero stage's; pass `style` to place a card elsewhere
 type Positioned = { style?: CSSProperties };
 
 export function ProgressCard({
@@ -68,7 +67,6 @@ export function ProgressCard({
   );
 }
 
-// "lime" is the sign-up variant: lime card, blue star and dark count bubble
 const HAPPY_VARIANTS = {
   default: {
     card: "",

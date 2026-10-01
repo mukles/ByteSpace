@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// Auth screens: logo-only header over the full-bleed blue grid
 export default function AuthLayout({ children }: LayoutProps<"/">) {
   return (
     <div className="relative isolate flex flex-1 flex-col overflow-hidden bg-primary text-shuttle-gray-50">

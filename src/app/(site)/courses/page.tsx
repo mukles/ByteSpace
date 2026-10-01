@@ -35,14 +35,12 @@ export default async function CoursesPage({
 
   const results = searchCourses(catalog, query);
   const totalPages = Math.max(1, Math.ceil(results.length / data.pageSize));
-  // Out-of-range pages clamp to the last page of results
   const page = Math.min(query.page, totalPages);
   const courses = results.slice(
     (page - 1) * data.pageSize,
     page * data.pageSize,
   );
 
-  // Current params as plain strings, for links and the search form
   const current = Object.fromEntries(
     Object.entries(params).flatMap(([key, value]) => {
       const v = Array.isArray(value) ? value[0] : value;
@@ -56,7 +54,6 @@ export default async function CoursesPage({
     const qs = search.toString();
     return `/courses${qs ? `?${qs}` : ""}#results`;
   };
-  // q and scope come from the form's own inputs; a new search starts at page 1
   const hiddenFields = Object.fromEntries(
     Object.entries(current).filter(([key]) => !["q", "scope", "page"].includes(key)),
   );

@@ -20,7 +20,6 @@ function Stars({ count = 5, label }: { count?: number; label: string }) {
 }
 
 export function ReviewsPanel({ reviews }: Pick<CourseDetailsData, "reviews">) {
-  // null = all ratings
   const [filter, setFilter] = useState<number | null>(null);
   const visible =
     filter === null

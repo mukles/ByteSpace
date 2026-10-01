@@ -21,8 +21,6 @@ export function SearchHero({
   hiddenFields,
 }: SearchHeroProps) {
   return (
-    // Only the grid is clipped, so the scope dropdown can hang below the hero;
-    // z-10 keeps that dropdown above the results toolbar
     <section className="relative isolate z-10 bg-primary">
       <div
         aria-hidden="true"

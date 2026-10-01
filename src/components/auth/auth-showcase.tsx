@@ -4,13 +4,11 @@ import { HeroShape } from "@/components/hero/hero-shape";
 import { readMd } from "@/lib/content";
 import type { AuthShowcaseData, CourseShowcaseData } from "@/types/content";
 
-// Positions are from the Figma frame, relative to the left column's top-left
 const CARD_POSITIONS = [
   { left: 2, top: 274 },
   { left: 113, top: 185 },
 ];
 
-// Shape x is the offset of its centre from the stage centre (stage is 620px wide)
 const SHAPES = [
   {
     src: "/images/hero/shape-spring-small.png",
@@ -36,7 +34,6 @@ const SHAPES = [
   },
 ] as const;
 
-// Decorative collage beside the auth forms — hidden from assistive tech and pointer input
 export function AuthShowcase() {
   const { data } = readMd<AuthShowcaseData>("auth-showcase");
   const { data: catalog } = readMd<CourseShowcaseData>("pages/course-showcase");

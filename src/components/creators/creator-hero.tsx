@@ -20,7 +20,6 @@ export function CreatorHero({
 }: CreatorHeroProps) {
   return (
     <section className="relative isolate overflow-hidden bg-primary text-shuttle-gray-50">
-      {/* Offset by the navbar height so the grid runs on from the header */}
       <Image
         src="/images/auth/grid.svg"
         alt=""

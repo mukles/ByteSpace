@@ -8,7 +8,6 @@ export async function Navbar() {
 
   return (
     <header className="relative z-50 bg-primary text-shuttle-gray-50">
-      {/* Same grid as the hero, drawn from the top so the lines run continuously */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <Image
           src="/images/hero/grid.svg"

@@ -50,15 +50,12 @@ export function ToolbarDropdown({
     };
   }, [open]);
 
-  // Looked up by id (not the ref) because panels get this during render
   const close = () => {
     setOpen(false);
     document.getElementById(buttonId)?.focus();
   };
 
   return (
-    // On phones the panel spans the nearest positioned container (the toolbar row)
-    // instead of hanging off the button, so it can't run off-screen
     <div ref={root} className="sm:relative">
       <button
         ref={button}

@@ -64,7 +64,6 @@ export function HeroAnimator({ children }: { children: ReactNode }) {
             "<",
           );
 
-        // Count the progress value up alongside the bar
         const value = scope.current?.querySelector<HTMLElement>(
           q("progress-value"),
         );
@@ -113,7 +112,6 @@ export function HeroAnimator({ children }: { children: ReactNode }) {
     { scope },
   );
 
-  // Hidden until GSAP takes over, so the pre-hydration HTML doesn't flash
   return (
     <div ref={scope} className="invisible">
       {children}

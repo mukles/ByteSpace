@@ -76,7 +76,6 @@ function searchFields(course: Course, scope: SearchScope) {
   return [course.title, course.category, course.author];
 }
 
-// Title hits outrank category/author hits; earlier matches rank higher
 function relevance(course: Course, needle: string) {
   const title = course.title.toLowerCase();
   if (title.startsWith(needle)) return 3;
@@ -111,7 +110,6 @@ export function searchCourses(courses: Course[], query: CourseQuery) {
     return true;
   });
 
-  // Array#sort is stable, so ties keep catalogue order
   const by: Record<SortKey, (a: Course, b: Course) => number> = {
     relevant: (a, b) =>
       needle ? relevance(b, needle) - relevance(a, needle) : 0,

@@ -23,7 +23,6 @@ type CoursesToolbarProps = Pick<
   | "clearLabel"
 > & {
   categories: string[];
-  // Optional leading icons, as on the creator profile toolbar
   icons?: Partial<Record<"filter" | "level" | "category" | "sort", string>>;
   buttonClassName?: string;
 };
@@ -68,7 +67,6 @@ export function CoursesToolbar({
     const levels = query.levels.includes(value)
       ? query.levels.filter((l) => l !== value)
       : [...query.levels, value];
-    // Keep the URL in the same order as the options
     const ordered = level.options
       .map((option) => option.value)
       .filter((v) => levels.includes(v));
@@ -229,7 +227,6 @@ export function CoursesToolbar({
                 label={option.label}
                 checked={query.sort === option.value}
                 onChange={() => {
-                  // The default sort stays out of the URL
                   update({
                     sort:
                       option.value === defaultSort.value ? null : option.value,

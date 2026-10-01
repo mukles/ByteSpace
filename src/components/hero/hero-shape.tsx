@@ -4,15 +4,12 @@ import { cn } from "@/lib/utils";
 interface HeroShapeProps {
   src: string;
   size: number;
-  /** Horizontal offset of the shape's centre from the stage centre, in px */
   x: number;
-  /** Top offset within the stage, in px */
   y: number;
   tint: "lime" | "white";
   flip?: boolean;
 }
 
-// Grayscale 3D render tinted with a hard-light colour overlay, as in Figma
 export function HeroShape({ src, size, x, y, tint, flip }: HeroShapeProps) {
   return (
     <div

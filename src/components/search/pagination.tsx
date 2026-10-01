@@ -17,7 +17,6 @@ function Arrow({
   target,
 }: {
   direction: "prev" | "next";
-  /** null when there's no page in that direction */
   target: string | null;
 }) {
   const label = direction === "prev" ? "Previous page" : "Next page";

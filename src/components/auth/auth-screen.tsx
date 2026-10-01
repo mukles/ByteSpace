@@ -7,7 +7,6 @@ interface AuthScreenProps {
   children: ReactNode;
 }
 
-// Two-column auth layout: intro + showcase collage on the left, form card on the right
 export function AuthScreen({ intro, children }: AuthScreenProps) {
   return (
     <main className="mx-auto flex w-full max-w-[1232px] flex-1 flex-col gap-10 px-4 pb-16 lg:pb-[120px] xl:grid xl:grid-cols-[1fr_579px] xl:gap-0">

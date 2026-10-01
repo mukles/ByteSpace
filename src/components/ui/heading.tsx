@@ -2,7 +2,6 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import type { ElementType, HTMLAttributes } from "react";
 
-// Sizes follow the Figma type scale (desktop value is the last step)
 const headingVariants = cva("font-heading tracking-[-0.01em]", {
   variants: {
     size: {
@@ -82,7 +81,6 @@ export function Heading({
   className,
   ...props
 }: HeadingProps) {
-  // Explicit `as` wins; otherwise pick a sensible tag for the size
   const Tag = as ?? defaultTag[size ?? "heading-m"];
 
   return (

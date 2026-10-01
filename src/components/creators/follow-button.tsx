@@ -7,7 +7,6 @@ interface FollowButtonProps {
   followingLabel: string;
 }
 
-// Design-only: following isn't persisted yet
 export function FollowButton({ label, followingLabel }: FollowButtonProps) {
   const [following, setFollowing] = useState(false);
 

@@ -7,7 +7,6 @@ import { HeroAnimator } from "./hero-animator";
 import { HeroShape } from "./hero-shape";
 import { SearchBar } from "./search-bar";
 
-// Stage coordinates: x is offset from centre, y is from the stage top (Figma y − 512)
 const SHAPES = [
   {
     src: "/images/hero/shape-spring.png",
@@ -96,7 +95,6 @@ export async function Hero() {
           </div>
         </div>
 
-        {/* Visual stage — laid out at the 1440px design width and scaled down below lg */}
         <div className="relative h-[230px] sm:h-[333px] md:h-[410px] lg:h-[512px]">
           <div className="absolute top-0 left-1/2 h-[512px] w-[1440px] -translate-x-1/2 origin-top scale-[0.45] sm:scale-[0.65] md:scale-[0.8] lg:scale-100">
             <Image
