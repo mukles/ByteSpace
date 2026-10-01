@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Heading } from "@/components/ui/heading";
 import type { CreatorProfileData } from "@/types/content";
+import { CreatorAvatar } from "./creator-avatar";
 import { FollowButton } from "./follow-button";
 
 type CreatorHeroProps = Omit<
@@ -19,25 +20,24 @@ export function CreatorHero({
   followingLabel,
 }: CreatorHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-primary text-shuttle-gray-50">
+    <section className="relative isolate overflow-hidden bg-primary pt-20 text-shuttle-gray-50 lg:pt-30">
       <Image
         src="/images/auth/grid.svg"
         alt=""
         width={1442}
         height={1026}
         aria-hidden="true"
-        className="pointer-events-none absolute -top-20 left-1/2 -z-10 max-w-none -translate-x-1/2 lg:-top-30"
+        className="pointer-events-none absolute top-0 left-1/2 -z-10 max-w-none -translate-x-1/2"
       />
       <div className="mx-auto flex max-w-[1232px] flex-col gap-8 px-4 pt-8 pb-14 lg:gap-10 lg:pt-[52px] lg:pb-[82px]">
         <div className="flex flex-col gap-8 lg:gap-10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <Image
+            <CreatorAvatar
+              name={name}
               src={avatar}
-              alt=""
-              width={96}
-              height={96}
+              size={96}
               priority
-              className="size-20 shrink-0 rounded-[24px] object-cover sm:size-24"
+              className="size-20 rounded-[24px] text-[28px] sm:size-24 sm:text-[32px]"
             />
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap items-center gap-2">

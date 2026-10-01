@@ -1,15 +1,17 @@
 ---
 title: "Creators"
-description: "Create and manage courses easily. ByteSpace supports individuals and entities in the creation, publication, and administration of educational courses."
+description: "Meet the creators sharing their expertise on ByteSpace — browse their courses, ratings, and learners."
+eyebrow: "People worth learning from"
+heading: "Course Creators"
+subheading: "Meet the studios and independent experts sharing their craft on ByteSpace. Follow the ones you like and learn at your own pace."
+summary:
+  creators: "Creators"
+  courses: "Courses"
+  rating: "Avg. rating"
+card:
+  courses: "Courses"
+  learners: "Learners"
+  rating: "Rating"
+  viewProfile: "View profile"
+emptyMessage: "No creators have joined yet — check back soon."
 ---
-
-# Create & Manage Courses Easily.
-
-ByteSpace supports individuals or entities in the creation, publication, and administration of educational courses.
-
-## Why Create on ByteSpace?
-
-- **Share Your Expertise** — Teach what you know to thousands of eager learners
-- **Monetize Your Passion** — Earn from every student who enrolls in your course
-- **Flexibility and Autonomy** — Create on your schedule, at your own pace
-- **Build a Community** — Connect with learners and other creators globally

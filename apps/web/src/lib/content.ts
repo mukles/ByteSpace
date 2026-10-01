@@ -4,6 +4,8 @@ import matter from "gray-matter";
 import type {
   CourseDetailsData,
   CourseShowcaseData,
+  CreatorProfileData,
+  CreatorSummary,
   MdFile,
   NavLink,
   PageMeta,
@@ -82,6 +84,46 @@ export function getCreatorSlugs(): string[] {
     .readdirSync(dir)
     .filter((f) => f.endsWith(".md"))
     .map((f) => f.replace(/\.md$/, ""));
+}
+
+export function getCreators(): CreatorSummary[] {
+  const catalog = getCatalog();
+
+  const teachers = new Map<string, Set<string>>();
+  for (const c of catalog) {
+    const set = teachers.get(c.category) ?? new Set();
+    teachers.set(c.category, set.add(c.author.toLowerCase()));
+  }
+  const reach = (category: string) => teachers.get(category)?.size ?? 0;
+
+  return getCreatorSlugs()
+    .map((slug) => {
+      const { name, tagline, avatar } =
+        readMd<CreatorProfileData>(`creators/${slug}`).data;
+      const own = catalog.filter(
+        (course) => course.author.toLowerCase() === name.toLowerCase(),
+      );
+      const ratings = own.map((c) => Number.parseFloat(c.rating));
+
+      return {
+        slug,
+        name,
+        tagline,
+        avatar,
+        courses: own.length,
+        learners: own.reduce(
+          (sum, c) => sum + (Number.parseInt(c.enrolled, 10) || 0),
+          0,
+        ),
+        rating: ratings.length
+          ? ratings.reduce((a, b) => a + b, 0) / ratings.length
+          : null,
+        categories: [...new Set(own.map((c) => c.category))].sort(
+          (a, b) => reach(a) - reach(b) || a.localeCompare(b),
+        ),
+      };
+    })
+    .sort((a, b) => b.learners - a.learners);
 }
 
 export function getNavLinks(): NavLink[] {

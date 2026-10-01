@@ -10,6 +10,7 @@ interface ToolbarDropdownProps {
   label: ReactNode;
   panelLabel: string;
   count?: number;
+  active?: boolean;
   align?: "left" | "right";
   buttonClassName?: string;
   trailing?: ReactNode;
@@ -20,6 +21,7 @@ export function ToolbarDropdown({
   label,
   panelLabel,
   count = 0,
+  active = count > 0,
   align = "left",
   buttonClassName,
   trailing,
@@ -66,7 +68,7 @@ export function ToolbarDropdown({
         onClick={() => setOpen(!open)}
         className={cn(
           toolbarButtonClass,
-          count > 0 && "border-primary",
+          active && "border-primary bg-primary/5 hover:bg-primary/10",
           buttonClassName,
         )}
       >

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Footer } from "@/components/footer/footer";
 import { Navbar } from "@/components/navbar/navbar";
 import { Heading } from "@/components/ui/heading";
-import { readMd } from "@/lib/content";
+import { getNavLinks, readMd } from "@/lib/content";
 import type { NotFoundData } from "@/types/content";
 
 export const metadata: Metadata = { title: "Page not found — ByteSpace" };
@@ -14,15 +14,15 @@ export default function NotFound() {
 
   return (
     <>
-      <Navbar />
-      <main className="relative isolate overflow-hidden bg-primary">
+      <Navbar links={getNavLinks()} />
+      <main className="relative isolate overflow-hidden bg-primary pt-20 lg:pt-30">
         <Image
           src="/images/auth/grid.svg"
           alt=""
           width={1442}
           height={1026}
           aria-hidden="true"
-          className="pointer-events-none absolute -top-20 left-1/2 -z-10 max-w-none -translate-x-1/2 lg:-top-30"
+          className="pointer-events-none absolute top-0 left-1/2 -z-10 max-w-none -translate-x-1/2"
         />
         <div className="mx-auto flex max-w-[1232px] flex-col items-center px-4 pt-10 pb-20 text-center lg:pb-[125px]">
           <p

@@ -96,7 +96,14 @@ export interface CreatorCtaData {
 export interface TestimonialsData {
   heading: string;
   body: string;
-  testimonials: { name: string; role: string; avatar: string; quote: string }[];
+  testimonials: Testimonial[];
+}
+
+export interface Testimonial {
+  name: string;
+  role: string;
+  avatar: string;
+  quote: string;
 }
 
 export interface FooterData {
@@ -150,6 +157,7 @@ export interface CoursesPageData {
   searchPlaceholder: string;
   scopes: SelectOption[];
   filterLabel: string;
+  toolbarIcons: { filter: string; level: string; category: string; sort: string };
   price: { heading: string; anyLabel: string; options: SelectOption[] };
   rating: { heading: string; anyLabel: string; options: SelectOption[] };
   level: { label: string; options: SelectOption[] };
@@ -240,7 +248,7 @@ export interface CreatorProfileData {
   name: string;
   badge: string;
   tagline: string;
-  avatar: string;
+  avatar?: string;
   bio: string[];
   productsLabel: string;
   stats: { value: string; label: string }[];
@@ -249,6 +257,26 @@ export interface CreatorProfileData {
   toolbarIcons: { filter: string; level: string; category: string; sort: string };
   emptyMessage: string;
   noResults: string;
+}
+
+export interface CreatorsPageData {
+  eyebrow: string;
+  heading: string;
+  subheading: string;
+  summary: { creators: string; courses: string; rating: string };
+  card: { courses: string; learners: string; rating: string; viewProfile: string };
+  emptyMessage: string;
+}
+
+export interface CreatorSummary {
+  slug: string;
+  name: string;
+  tagline: string;
+  avatar?: string;
+  courses: number;
+  learners: number;
+  rating: number | null;
+  categories: string[];
 }
 
 export interface NotFoundData {

@@ -27,7 +27,11 @@ export function HeroAnimator({ children }: { children: ReactNode }) {
           stagger: 0.12,
         })
           .from(q("arc"), { scale: 0.6, autoAlpha: 0, duration: 1.2 }, "-=0.5")
-          .from(q("student"), { y: 120, autoAlpha: 0, duration: 1.1 }, "<0.1")
+          .from(
+            q("student"),
+            { yPercent: 100, duration: 1.2, ease: "expo.out" },
+            "<0.25",
+          )
           .from(
             q("shape"),
             {

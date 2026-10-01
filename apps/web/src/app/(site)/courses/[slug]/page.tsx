@@ -33,19 +33,19 @@ export default async function CourseDetailsPage({
   const course = await getCourse(params);
 
   return (
-    <main className="isolate overflow-x-clip">
+    <main className="isolate overflow-x-clip pt-20 lg:pt-30">
       <div className="mx-auto grid max-w-[1232px] grid-cols-1 px-4 pb-20 lg:grid-cols-[minmax(0,720px)_414px] lg:justify-between lg:gap-x-8 lg:pb-[120px]">
         <div
           aria-hidden="true"
           className="pointer-events-none relative col-span-full row-start-1 row-end-3 -z-10"
         >
-          <div className="absolute top-0 -bottom-10 left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-primary lg:-bottom-[62px]">
+          <div className="absolute -top-20 -bottom-10 left-1/2 w-screen lg:-top-30 -translate-x-1/2 overflow-hidden bg-primary lg:-bottom-[62px]">
             <Image
               src="/images/auth/grid.svg"
               alt=""
               width={1442}
               height={1026}
-              className="absolute -top-20 left-1/2 max-w-none -translate-x-1/2 lg:-top-30"
+              className="absolute top-0 left-1/2 max-w-none -translate-x-1/2"
             />
           </div>
         </div>
