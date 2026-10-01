@@ -57,14 +57,14 @@ export async function Hero() {
   const { data } = readMd<HeroData>("pages/hero");
 
   return (
-    <section className="relative isolate overflow-hidden bg-primary">
+    <section className="relative isolate overflow-hidden bg-primary pt-20 lg:pt-30">
       <Image
         src="/images/hero/grid.svg"
         alt=""
         width={1442}
         height={1026}
         aria-hidden="true"
-        className="pointer-events-none absolute -top-20 left-1/2 lg:-top-30 -z-10 max-w-none -translate-x-1/2"
+        className="pointer-events-none absolute top-0 left-1/2 -z-10 max-w-none -translate-x-1/2"
       />
 
       <HeroAnimator>

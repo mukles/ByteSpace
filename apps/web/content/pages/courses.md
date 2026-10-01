@@ -11,6 +11,11 @@ scopes:
   - value: "categories"
     label: "Categories"
 filterLabel: "Filter"
+toolbarIcons:
+  filter: "/images/creators/filter.svg"
+  level: "/images/creators/level.svg"
+  category: "/images/creators/category.svg"
+  sort: "/images/creators/sort.svg"
 price:
   heading: "Price"
   anyLabel: "Any price"

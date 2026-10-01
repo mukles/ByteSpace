@@ -1,24 +1,32 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { getNavLinks } from "@/lib/content";
+import { useEffect, useState } from "react";
+import type { NavLink } from "@/types/content";
 import { AuthNav } from "./auth-nav";
 import { MobileMenu, NavLinks } from "./nav-client";
 
-export async function Navbar() {
-  const navLinks = getNavLinks();
+export function Navbar({ links }: { links: NavLink[] }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 180);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="relative z-50 bg-primary text-shuttle-gray-50">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <Image
-          src="/images/hero/grid.svg"
-          alt=""
-          width={1442}
-          height={1026}
-          className="absolute top-0 left-1/2 max-w-none -translate-x-1/2"
-        />
-      </div>
-      <div className="relative mx-auto grid h-20 max-w-[1232px] grid-cols-[1fr_auto] items-center px-4 md:grid-cols-[1fr_auto_1fr] lg:h-[120px]">
+    <header
+      data-scrolled={scrolled || undefined}
+      className="group/header fixed inset-x-0 top-0 z-50 text-shuttle-gray-50"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -translate-y-full bg-primary/90 shadow-lg shadow-primary/20 backdrop-blur-md transition-transform duration-300 ease-out group-data-scrolled/header:translate-y-0"
+      />
+      <div className="relative mx-auto grid h-20 max-w-[1232px] grid-cols-[1fr_auto] items-center px-4 md:grid-cols-[1fr_auto_1fr] transition-[height] duration-300 ease-out lg:h-[120px] lg:group-data-scrolled/header:h-20">
         <Link
           href="/"
           aria-label="ByteSpace home"
@@ -33,7 +41,7 @@ export async function Navbar() {
           <span className="font-display text-2xl font-bold">ByteSpace</span>
         </Link>
 
-        <NavLinks links={navLinks} />
+        <NavLinks links={links} />
 
         <div className="hidden items-center gap-6 justify-self-end md:flex">
           <AuthNav variant="desktop" />
@@ -42,7 +50,7 @@ export async function Navbar() {
           </Link>
         </div>
 
-        <MobileMenu links={navLinks} />
+        <MobileMenu links={links} />
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
 import type { CoursesPageData } from "@/types/content";
 import {
   OptionRow,
@@ -27,7 +27,7 @@ type CoursesToolbarProps = Pick<
   buttonClassName?: string;
 };
 
-function withIcon(label: string, icon?: string) {
+function withIcon(label: ReactNode, icon?: string) {
   if (!icon) return label;
   return (
     <>
@@ -172,10 +172,20 @@ export function CoursesToolbar({
         </ToolbarDropdown>
 
         <ToolbarDropdown
-          label={withIcon(categoryLabel, icons.category)}
+          label={withIcon(
+            query.category ? (
+              <>
+                <span className="sr-only">{categoryLabel}: </span>
+                <span className="max-w-60 truncate">{query.category}</span>
+              </>
+            ) : (
+              categoryLabel
+            ),
+            icons.category,
+          )}
           panelLabel={categoryLabel}
           buttonClassName={buttonClassName}
-          count={query.category ? 1 : 0}
+          active={Boolean(query.category)}
         >
           {(close) => (
             <fieldset className="max-h-80 overflow-y-auto">

@@ -91,6 +91,7 @@ export default async function CoursesPage({
             sortOptions={data.sortOptions}
             clearLabel={data.clearLabel}
             categories={categories}
+            icons={data.toolbarIcons}
           />
 
           <CategoryTabs

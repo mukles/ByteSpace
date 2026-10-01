@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Heading } from "@/components/ui/heading";
 import { readMd } from "@/lib/content";
 import type { TestimonialsData } from "@/types/content";
+import { TestimonialSlider } from "./testimonial-slider";
 
 const GLOWS = [
   { src: "/images/glows/glow-lime-lg.svg", size: 1217, left: 802, top: -281 },
@@ -31,7 +32,7 @@ export function Testimonials() {
         ))}
       </div>
 
-      <div className="mx-auto flex max-w-[1236px] flex-col gap-10 px-4 py-16 lg:gap-[72px] lg:pt-[74px] lg:pb-[60px]">
+      <div className="mx-auto max-w-[1236px] px-4 pt-16 pb-10 lg:pt-[74px] lg:pb-[72px]">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:gap-[43px]">
           <Heading
             as="h2"
@@ -45,31 +46,10 @@ export function Testimonials() {
             {data.body}
           </p>
         </div>
+      </div>
 
-        <ul className="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-[41px]">
-          {data.testimonials.map((t) => (
-            <li key={t.name}>
-              <figure className="flex flex-col gap-6 rounded-[24px] bg-white p-6 transition-shadow duration-300 hover:shadow-card">
-                <Image
-                  src={t.avatar}
-                  alt=""
-                  width={80}
-                  height={80}
-                  className="rounded-full"
-                />
-                <figcaption>
-                  <p className="font-heading text-xl leading-7 font-semibold tracking-[-0.01em] text-black-950">
-                    {t.name}
-                  </p>
-                  <p className="text-lg leading-[1.6] text-primary">{t.role}</p>
-                </figcaption>
-                <blockquote className="text-base leading-[1.6] text-black-700 md:text-lg">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-              </figure>
-            </li>
-          ))}
-        </ul>
+      <div className="pb-16 lg:pb-[60px]">
+        <TestimonialSlider testimonials={data.testimonials} />
       </div>
     </section>
   );
