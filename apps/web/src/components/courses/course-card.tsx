@@ -59,7 +59,7 @@ export function CourseCard({
             {course.duration}
           </Badge>
           <Badge as="li" variant="glass" size="xs">
-            {course.comments}
+            {course.reviews}
           </Badge>
         </ul>
       </div>

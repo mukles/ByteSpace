@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export const toolbarButtonClass = cn(
   buttonVariants({ variant: "outline", size: "tab" }),
-  "min-h-12 justify-start gap-1",
+  "flex min-h-12 w-full min-w-0 gap-1 sm:w-auto sm:justify-start",
 );
 
 interface ToolbarDropdownProps {
@@ -61,7 +61,7 @@ export function ToolbarDropdown({
   };
 
   return (
-    <div ref={root} className="sm:relative">
+    <div ref={root} className="min-w-0 sm:relative">
       <button
         ref={button}
         id={buttonId}

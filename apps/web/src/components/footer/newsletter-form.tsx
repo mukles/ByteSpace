@@ -36,7 +36,9 @@ export function NewsletterForm({
           placeholder={placeholder}
           className="h-[52px] w-full rounded-full border border-shuttle-gray-200 bg-white px-6 text-base leading-[1.6] text-shuttle-gray-950 placeholder:text-shuttle-gray-950 focus:border-primary focus:outline-none sm:w-[376px]"
         />
-        <Button type="submit">{button}</Button>
+        <Button type="submit" className="text-secondary-foreground">
+          {button}
+        </Button>
       </form>
       <p
         role="status"

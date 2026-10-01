@@ -100,7 +100,7 @@ export function CreatorCta() {
         </p>
         <Button
           href={data.cta.href}
-          className="focus-visible:outline-secondary"
+          className="text-secondary-foreground focus-visible:outline-secondary"
         >
           {data.cta.label}
         </Button>

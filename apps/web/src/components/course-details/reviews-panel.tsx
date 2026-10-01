@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { CreatorAvatar } from "@/components/creators/creator-avatar";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
@@ -108,12 +109,11 @@ export function ReviewsPanel({ reviews }: Pick<CourseDetailsData, "reviews">) {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex flex-col gap-6">
                   <div className="flex items-start gap-3">
-                    <Image
+                    <CreatorAvatar
+                      name={review.name}
                       src={review.avatar}
-                      alt=""
-                      width={52}
-                      height={52}
-                      className="shrink-0 rounded-full"
+                      size={52}
+                      className="size-[52px] rounded-full text-lg"
                     />
                     <div>
                       <p className="text-lg leading-[1.2] font-medium text-shuttle-gray-950">

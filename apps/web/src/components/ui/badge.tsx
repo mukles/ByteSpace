@@ -15,6 +15,7 @@ const badgeVariants = cva(
 
       size: {
         xs: "gap-1 px-3 py-1.5 text-xs",
+        sm: "gap-1.5 px-4 py-1.5 text-sm",
         md: "gap-2 px-6 py-2 text-base",
         lg: "gap-2 px-6 py-3 text-lg whitespace-nowrap",
       },

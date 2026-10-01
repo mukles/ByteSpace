@@ -24,15 +24,50 @@ export interface HeroData {
   };
 }
 
+export interface CourseFile {
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  previewVideo?: string;
+  category: string;
+  level: string;
+  creator: string;
+  price: string;
+  priceSuffix?: string;
+  students: number;
+  lessonCount: number;
+  duration: string;
+  featuredLessons: CourseLesson[];
+  modules: { title: string; summary: string }[];
+  includes: IconLabel[];
+  sneakPeek: string[];
+  keyPoints: string[];
+}
+
+export interface CourseReviewsFile {
+  course: string;
+  reviews: CourseReview[];
+}
+
+export interface CreatorFile {
+  name: string;
+  tagline: string;
+  role: string;
+  avatar?: string;
+  followers: number;
+}
+
 export interface Course {
   title: string;
   slug: string;
   image: string;
   category: string;
   author: string;
+  creatorSlug: string;
   lessons: string;
   duration: string;
-  comments: string;
+  reviews: string;
   level: string;
   enrolled: string;
   rating: string;
@@ -50,6 +85,13 @@ export interface CourseShowcaseData {
   categories: string[];
   courses: Course[];
 }
+
+export type CourseShowcaseFile = Omit<
+  CourseShowcaseData,
+  "courses" | "categories"
+> & {
+  courses: string[];
+};
 
 export interface MdFile<T = Record<string, unknown>> {
   data: T;
@@ -157,7 +199,12 @@ export interface CoursesPageData {
   searchPlaceholder: string;
   scopes: SelectOption[];
   filterLabel: string;
-  toolbarIcons: { filter: string; level: string; category: string; sort: string };
+  toolbarIcons: {
+    filter: string;
+    level: string;
+    category: string;
+    sort: string;
+  };
   price: { heading: string; anyLabel: string; options: SelectOption[] };
   rating: { heading: string; anyLabel: string; options: SelectOption[] };
   level: { label: string; options: SelectOption[] };
@@ -185,8 +232,8 @@ export interface CourseLesson {
 
 export interface CourseReview {
   name: string;
-  role: string;
-  avatar: string;
+  role?: string;
+  avatar?: string;
   rating: number;
   date: string;
   body: string;
@@ -199,7 +246,7 @@ export interface CourseDetailsData {
   author: string;
   stats: IconLabel[];
   shareLabel: string;
-  preview: { image: string; playLabel: string };
+  preview: { image: string; playLabel: string; video?: string };
   tabs: string[];
   about: {
     descriptionHeading: string;
@@ -237,11 +284,53 @@ export interface CourseDetailsData {
   creator: {
     name: string;
     role: string;
-    avatar: string;
+    avatar?: string;
     bio: string;
     profileLabel: string;
     profileHref: string;
   };
+}
+
+export interface CourseDetailsPage {
+  shareLabel: string;
+  playLabel: string;
+  stats: {
+    levelIcon: string;
+    ratingIcon: string;
+    ratingLabel: string;
+    studentsIcon: string;
+    studentsLabel: string;
+  };
+  tabs: string[];
+  about: Pick<
+    CourseDetailsData["about"],
+    "descriptionHeading" | "sneakPeekHeading" | "keyPointsHeading"
+  >;
+  curriculum: Omit<CourseDetailsData["curriculum"], "modules">;
+  reviews: Pick<
+    CourseDetailsData["reviews"],
+    | "heading"
+    | "intro"
+    | "ratingLabel"
+    | "listHeading"
+    | "allLabel"
+    | "emptyMessage"
+  >;
+  lessons: { heading: string; more: string };
+  enroll: { pitch: string; cta: string };
+  includesHeading: string;
+  creator: { profileLabel: string };
+}
+
+export interface CreatorProfilePage {
+  badge: string;
+  productsLabel: string;
+  followersLabel: string;
+  followLabel: string;
+  followingLabel: string;
+  toolbarIcons: CreatorProfileData["toolbarIcons"];
+  emptyMessage: string;
+  noResults: string;
 }
 
 export interface CreatorProfileData {
@@ -254,7 +343,12 @@ export interface CreatorProfileData {
   stats: { value: string; label: string }[];
   followLabel: string;
   followingLabel: string;
-  toolbarIcons: { filter: string; level: string; category: string; sort: string };
+  toolbarIcons: {
+    filter: string;
+    level: string;
+    category: string;
+    sort: string;
+  };
   emptyMessage: string;
   noResults: string;
 }
@@ -264,7 +358,12 @@ export interface CreatorsPageData {
   heading: string;
   subheading: string;
   summary: { creators: string; courses: string; rating: string };
-  card: { courses: string; learners: string; rating: string; viewProfile: string };
+  card: {
+    courses: string;
+    learners: string;
+    rating: string;
+    viewProfile: string;
+  };
   emptyMessage: string;
 }
 

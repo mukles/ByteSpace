@@ -56,7 +56,6 @@ sortOptions:
     label: "Price: low to high"
   - value: "price-desc"
     label: "Price: high to low"
-# Tab row under the toolbar; "Featured" (in course-showcase) clears the category
 categories:
   - "Music"
   - "Drawing & Painting"
@@ -69,7 +68,6 @@ categories:
 pageSize: 18
 clearLabel: "Clear"
 clearAllLabel: "Clear all"
-# {count} is replaced with the number of matches
 resultsLabel: "{count} courses"
 resultsLabelOne: "1 course"
 noResults: "No courses match your search. Try a different keyword or clear the filters."

@@ -15,7 +15,7 @@ export function FollowButton({ label, followingLabel }: FollowButtonProps) {
     <Button
       aria-pressed={following}
       onClick={() => setFollowing(!following)}
-      className="focus-visible:outline-white"
+      className="text-mirage-950 focus-visible:outline-white"
     >
       {following ? followingLabel : label}
     </Button>

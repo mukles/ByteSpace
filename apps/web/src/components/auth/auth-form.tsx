@@ -110,7 +110,7 @@ export function AuthForm({
           href={promptLink.href}
           variant="link"
           size="inline"
-          className="leading-[1.6]"
+          className="font-normal leading-[1.6]"
         >
           {promptLink.label}
         </Button>

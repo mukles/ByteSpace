@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { categorySlug } from "@/lib/course-search";
 import { cn } from "@/lib/utils";
 import { useCourseSearch } from "./search-state";
 
@@ -28,14 +29,16 @@ export function CategoryTabs({
     >
       {[featuredLabel, ...categories].map((category, i) => {
         const isActive =
-          i === 0 ? !query.category : query.category === category;
+          i === 0 ? !query.category : query.category === categorySlug(category);
         return (
           <Button
             key={category}
             variant={isActive ? "primary" : "muted"}
             size="tab"
             aria-pressed={isActive}
-            onClick={() => update({ category: i === 0 ? null : category })}
+            onClick={() =>
+              update({ category: i === 0 ? null : categorySlug(category) })
+            }
           >
             {category}
           </Button>
