@@ -80,7 +80,10 @@ export default function CreatorsPage() {
         className="mx-auto max-w-[1232px] px-4 py-14 lg:py-20"
       >
         {creators.length > 0 ? (
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          <ul
+            data-reveal-stagger
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+          >
             {creators.map((creator) => (
               <li key={creator.slug}>
                 <CreatorCard creator={creator} labels={data.card} />

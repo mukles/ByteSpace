@@ -10,7 +10,10 @@ export function Footer() {
   return (
     <footer className="border-t border-shuttle-gray-200 bg-white text-shuttle-gray-950">
       <div className="mx-auto max-w-[1232px] px-4 pt-14 pb-10 lg:pt-[71px] lg:pb-[54px]">
-        <div className="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-[92px]">
+        <div
+          data-reveal-stagger
+          className="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-[92px]"
+        >
           <div className="flex max-w-[528px] flex-col gap-8 lg:gap-[45px]">
             <div className="flex flex-col gap-4">
               <Link

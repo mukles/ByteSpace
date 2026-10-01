@@ -71,7 +71,10 @@ export function CourseFilter({
 
       <div aria-live="polite" className="mt-12 lg:mt-[77px]">
         {visible.length > 0 ? (
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+          <ul
+            data-reveal-stagger
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10"
+          >
             {visible.map((course, i) => (
               <li key={`${course.title}-${i}`}>
                 <CourseCard course={course} />

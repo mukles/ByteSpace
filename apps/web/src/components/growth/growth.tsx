@@ -95,7 +95,10 @@ export function Growth() {
 
       <div className="mx-auto flex max-w-[1232px] flex-col gap-16 px-4 py-16 lg:gap-[72px] lg:py-[120px]">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-[63px]">
-          <div className="flex max-w-[574px] flex-col gap-6 lg:w-[574px] lg:shrink-0 lg:gap-10">
+          <div
+            data-reveal="left"
+            className="flex max-w-[574px] flex-col gap-6 lg:w-[574px] lg:shrink-0 lg:gap-10"
+          >
             <Heading as="h2" size="heading-m" balance={false}>
               {learner.heading}
             </Heading>
@@ -118,6 +121,7 @@ export function Growth() {
 
           <div
             aria-hidden="true"
+            data-reveal="right"
             className={cn(
               stageWrap,
               "h-[304px] w-[342px] sm:h-[552px] sm:w-[621px]",
@@ -154,6 +158,7 @@ export function Growth() {
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-[79px]">
           <div
             aria-hidden="true"
+            data-reveal="left"
             className={cn(
               stageWrap,
               "order-last h-[328px] w-[298px] sm:h-[596px] sm:w-[541px] lg:order-none",
@@ -188,7 +193,10 @@ export function Growth() {
             </div>
           </div>
 
-          <div className="flex max-w-[580px] flex-col gap-6 lg:gap-10">
+          <div
+            data-reveal="right"
+            className="flex max-w-[580px] flex-col gap-6 lg:gap-10"
+          >
             <Heading
               as="h2"
               size="heading-m"

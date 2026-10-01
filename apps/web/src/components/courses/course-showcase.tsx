@@ -10,7 +10,10 @@ export function CourseShowcase() {
   return (
     <section className="bg-white py-14 lg:py-[72px]">
       <div className="mx-auto max-w-[1231px] px-4">
-        <div className="flex flex-col items-center gap-4 text-center">
+        <div
+          data-reveal
+          className="flex flex-col items-center gap-4 text-center"
+        >
           <Heading
             as="h2"
             size="heading-m"
