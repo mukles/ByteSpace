@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { Footer } from "@/components/footer/footer";
 import { Navbar } from "@/components/navbar/navbar";
+import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { getNavLinks, readMd } from "@/lib/content";
 import type { NotFoundData } from "@/types/content";
@@ -45,12 +45,12 @@ export default function NotFound() {
             <p className="max-w-[486px] text-base leading-[1.6] text-shuttle-gray-100 md:max-w-none md:text-lg">
               {data.body}
             </p>
-            <Link
+            <Button
               href={data.cta.href}
-              className="rounded-[24px] bg-secondary px-6 py-3 text-lg leading-[1.2] font-medium text-shuttle-gray-950 transition-colors hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="focus-visible:outline-white"
             >
               {data.cta.label}
-            </Link>
+            </Button>
           </div>
         </div>
       </main>

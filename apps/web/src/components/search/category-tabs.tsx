@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { categorySlug } from "@/lib/course-search";
 import { cn } from "@/lib/utils";
 import { useCourseSearch } from "./search-state";
 
@@ -27,22 +29,19 @@ export function CategoryTabs({
     >
       {[featuredLabel, ...categories].map((category, i) => {
         const isActive =
-          i === 0 ? !query.category : query.category === category;
+          i === 0 ? !query.category : query.category === categorySlug(category);
         return (
-          <button
+          <Button
             key={category}
-            type="button"
+            variant={isActive ? "primary" : "muted"}
+            size="tab"
             aria-pressed={isActive}
-            onClick={() => update({ category: i === 0 ? null : category })}
-            className={cn(
-              "shrink-0 cursor-pointer rounded-[24px] px-4 py-3 text-base leading-[1.2] font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-              isActive
-                ? "bg-secondary text-shuttle-gray-950"
-                : "bg-shuttle-gray-50 text-shuttle-gray-700 hover:bg-shuttle-gray-100",
-            )}
+            onClick={() =>
+              update({ category: i === 0 ? null : categorySlug(category) })
+            }
           >
             {category}
-          </button>
+          </Button>
         );
       })}
     </div>

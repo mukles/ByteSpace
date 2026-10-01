@@ -1,6 +1,7 @@
 import Form from "next/form";
 import Image from "next/image";
 import { ScopeSelect } from "@/components/search/scope-select";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { SelectOption } from "@/types/content";
 
@@ -49,12 +50,12 @@ export function SearchBar({
       {scopes ? (
         <ScopeSelect name="scope" options={scopes} defaultValue={scopeValue} />
       ) : (
-        <button
+        <Button
           type="submit"
-          className="flex h-[52px] shrink-0 cursor-pointer items-center gap-2 rounded-[24px] bg-secondary px-6 text-base leading-[1.2] font-medium text-shuttle-gray-950 transition-colors hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary sm:text-lg"
+          className="h-[52px] py-0 text-base focus-visible:outline-secondary sm:text-lg"
         >
           {label}
-        </button>
+        </Button>
       )}
     </Form>
   );

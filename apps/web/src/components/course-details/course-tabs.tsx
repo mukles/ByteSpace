@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useId, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
 import type { CourseDetailsData } from "@/types/content";
@@ -139,7 +140,12 @@ function LessonsPanel({ curriculum }: Pick<CourseDetailsData, "curriculum">) {
   );
 }
 
-export function CourseTabs({ tabs, about, curriculum, reviews }: CourseTabsProps) {
+export function CourseTabs({
+  tabs,
+  about,
+  curriculum,
+  reviews,
+}: CourseTabsProps) {
   const [active, setActive] = useState(0);
   const id = useId();
 
@@ -151,27 +157,26 @@ export function CourseTabs({ tabs, about, curriculum, reviews }: CourseTabsProps
 
   return (
     <div className="flex flex-col gap-10">
-      <div role="tablist" aria-label="Course information" className="flex gap-4">
+      <div
+        role="tablist"
+        aria-label="Course information"
+        className="flex gap-4"
+      >
         {tabs.map((tab, i) => {
           const selected = i === active;
           return (
-            <button
+            <Button
               key={tab}
-              type="button"
+              variant={selected ? "primary" : "muted"}
+              size="tab"
               role="tab"
               id={`${id}-tab-${i}`}
               aria-selected={selected}
               aria-controls={selected ? `${id}-panel-${i}` : undefined}
               onClick={() => setActive(i)}
-              className={cn(
-                "cursor-pointer rounded-[24px] px-4 py-3 text-base leading-[1.2] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-                selected
-                  ? "bg-secondary text-shuttle-gray-950"
-                  : "bg-shuttle-gray-50 text-shuttle-gray-700 hover:bg-shuttle-gray-100",
-              )}
             >
               {tab}
-            </button>
+            </Button>
           );
         })}
       </div>

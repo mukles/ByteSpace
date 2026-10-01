@@ -14,8 +14,8 @@ import {
   parseCourseQuery,
   searchCourses,
 } from "@/lib/course-search";
-import { getCatalog, getPageMeta, readMd } from "@/lib/content";
-import type { CourseShowcaseData, CoursesPageData } from "@/types/content";
+import { getCatalog, getCategories, getPageMeta, readMd } from "@/lib/content";
+import type { CourseShowcaseFile, CoursesPageData } from "@/types/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, description } = getPageMeta("courses");
@@ -29,11 +29,11 @@ export default async function CoursesPage({
   const query = parseCourseQuery(params);
 
   const { data } = readMd<CoursesPageData>("pages/courses");
-  const { data: showcase } = readMd<CourseShowcaseData>(
+  const { data: showcase } = readMd<CourseShowcaseFile>(
     "pages/course-showcase",
   );
   const catalog = getCatalog();
-  const categories = [...new Set(catalog.map((c) => c.category))].sort();
+  const categories = getCategories();
 
   const results = searchCourses(catalog, query);
   const totalPages = Math.max(1, Math.ceil(results.length / data.pageSize));
@@ -100,7 +100,7 @@ export default async function CoursesPage({
 
           <CategoryTabs
             featuredLabel={showcase.featuredLabel}
-            categories={data.categories}
+            categories={categories}
             className="mt-8 xl:flex-nowrap xl:justify-between xl:gap-x-4"
           />
 

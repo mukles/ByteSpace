@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { HeroShape } from "@/components/hero/hero-shape";
+import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { readMd } from "@/lib/content";
 import type { CreatorCtaData } from "@/types/content";
@@ -98,12 +98,12 @@ export function CreatorCta() {
         <p className="text-base leading-[1.6] text-shuttle-gray-50 md:text-lg">
           {data.body}
         </p>
-        <Link
+        <Button
           href={data.cta.href}
-          className="rounded-[24px] bg-secondary px-6 py-3 text-lg leading-[1.2] font-medium text-secondary-foreground transition-colors hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+          className="text-secondary-foreground focus-visible:outline-secondary"
         >
           {data.cta.label}
-        </Link>
+        </Button>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 ---
 courses:
-  - "Build Digital Asset"
-  - "the Power of Big Data"
+  - "build-digital-asset"
+  - "the-power-of-big-data"
 happyStudents:
   label: "Happy Students"
   rating: "4.5"

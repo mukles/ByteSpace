@@ -1,11 +1,9 @@
 import { Heading } from "@/components/ui/heading";
-import { readMd } from "@/lib/content";
-import type { CourseShowcaseData } from "@/types/content";
+import { getShowcase } from "@/lib/content";
 import { CourseFilter } from "./course-filter";
 
 export function CourseShowcase() {
-  const { data } = readMd<CourseShowcaseData>("pages/course-showcase");
-  const { heading, subheading, ...filter } = data;
+  const { heading, subheading, ...filter } = getShowcase();
 
   return (
     <section className="bg-white py-14 lg:py-[72px]">

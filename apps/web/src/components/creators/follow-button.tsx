@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface FollowButtonProps {
   label: string;
@@ -11,13 +12,12 @@ export function FollowButton({ label, followingLabel }: FollowButtonProps) {
   const [following, setFollowing] = useState(false);
 
   return (
-    <button
-      type="button"
+    <Button
       aria-pressed={following}
       onClick={() => setFollowing(!following)}
-      className="shrink-0 cursor-pointer rounded-[24px] bg-secondary px-6 py-3 text-lg leading-[1.2] font-medium text-mirage-950 transition-colors hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      className="text-mirage-950 focus-visible:outline-white"
     >
       {following ? followingLabel : label}
-    </button>
+    </Button>
   );
 }

@@ -1,8 +1,8 @@
 import { CourseCard } from "@/components/courses/course-card";
 import { HappyStudentsCard } from "@/components/hero/hero-cards";
 import { HeroShape } from "@/components/hero/hero-shape";
-import { readMd } from "@/lib/content";
-import type { AuthShowcaseData, CourseShowcaseData } from "@/types/content";
+import { getCourses, readMd } from "@/lib/content";
+import type { AuthShowcaseData } from "@/types/content";
 
 const CARD_POSITIONS = [
   { left: 2, top: 274 },
@@ -36,10 +36,7 @@ const SHAPES = [
 
 export function AuthShowcase() {
   const { data } = readMd<AuthShowcaseData>("auth-showcase");
-  const { data: catalog } = readMd<CourseShowcaseData>("pages/course-showcase");
-  const courses = data.courses
-    .map((title) => catalog.courses.find((course) => course.title === title))
-    .filter((course) => course !== undefined);
+  const courses = getCourses(data.courses, "auth-showcase");
 
   return (
     <div
@@ -48,7 +45,7 @@ export function AuthShowcase() {
       className="pointer-events-none absolute inset-y-0 left-0 w-[620px]"
     >
       {courses.map((course, i) => (
-        <div key={course.title} className="absolute" style={CARD_POSITIONS[i]}>
+        <div key={course.slug} className="absolute" style={CARD_POSITIONS[i]}>
           <CourseCard
             course={course}
             variant="highlight"

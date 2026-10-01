@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import { CreatorAvatar } from "@/components/creators/creator-avatar";
+import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
 import type { CourseDetailsData } from "@/types/content";
@@ -42,12 +43,7 @@ export function CourseSidebar({
           </span>
           <span className={bodyClass}>{enroll.priceSuffix}</span>
         </p>
-        <button
-          type="button"
-          className="flex w-full cursor-pointer items-center justify-center rounded-[24px] bg-secondary px-6 py-3 text-lg leading-[1.2] font-medium text-shuttle-gray-950 transition-colors hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
-          {enroll.cta}
-        </button>
+        <Button fullWidth>{enroll.cta}</Button>
       </div>
 
       <Heading as="h2" size="heading-xs" className="leading-[1.2]">
@@ -55,8 +51,17 @@ export function CourseSidebar({
       </Heading>
       <ul className="flex flex-col gap-3">
         {includes.items.map((item) => (
-          <li key={item.label} className={cn("flex items-start gap-2", bodyClass)}>
-            <Image src={item.icon} alt="" width={24} height={24} className="shrink-0" />
+          <li
+            key={item.label}
+            className={cn("flex items-start gap-2", bodyClass)}
+          >
+            <Image
+              src={item.icon}
+              alt=""
+              width={24}
+              height={24}
+              className="shrink-0"
+            />
             {item.label}
           </li>
         ))}
@@ -72,12 +77,11 @@ export function CourseSidebar({
 
       <div className="flex flex-col gap-6">
         <div className="flex items-start gap-3">
-          <Image
+          <CreatorAvatar
+            name={creator.name}
             src={creator.avatar}
-            alt=""
-            width={52}
-            height={52}
-            className="shrink-0 rounded-full"
+            size={52}
+            className="size-[52px] rounded-full text-lg"
           />
           <div>
             <p className="text-lg leading-[1.2] font-medium text-shuttle-gray-950">
@@ -87,12 +91,14 @@ export function CourseSidebar({
           </div>
         </div>
         <p className={bodyClass}>{creator.bio}</p>
-        <Link
+        <Button
           href={creator.profileHref}
-          className="self-start rounded-[24px] border border-shuttle-gray-200 px-4 py-2 text-base leading-[1.2] font-medium text-shuttle-gray-700 transition-colors hover:bg-shuttle-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          variant="outline"
+          size="sm"
+          className="self-start text-shuttle-gray-700"
         >
           {creator.profileLabel}
-        </Link>
+        </Button>
       </div>
     </aside>
   );

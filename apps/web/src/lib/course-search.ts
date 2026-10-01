@@ -2,11 +2,7 @@ import type { Course } from "@/types/content";
 
 export type SearchScope = "courses" | "creators" | "categories";
 export type SortKey =
-  | "relevant"
-  | "rating"
-  | "popular"
-  | "price-asc"
-  | "price-desc";
+  "relevant" | "rating" | "popular" | "price-asc" | "price-desc";
 export type PriceFilter = "free" | "paid";
 
 export interface CourseQuery {
@@ -40,6 +36,14 @@ function oneOf<T extends string>(value: string, allowed: T[], fallback: T): T {
   return (allowed as string[]).includes(value) ? (value as T) : fallback;
 }
 
+export function categorySlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export function parseCourseQuery(params: RawParams): CourseQuery {
   const page = Number.parseInt(first(params.page), 10);
   const rating = Number.parseFloat(first(params.rating));
@@ -48,7 +52,7 @@ export function parseCourseQuery(params: RawParams): CourseQuery {
   return {
     q: first(params.q),
     scope: oneOf(first(params.scope), SCOPES, "courses"),
-    category: first(params.category) || null,
+    category: categorySlug(first(params.category)) || null,
     levels: first(params.level)
       .toLowerCase()
       .split(",")
@@ -95,7 +99,8 @@ export function searchCourses(courses: Course[], query: CourseQuery) {
     ) {
       return false;
     }
-    if (query.category && course.category !== query.category) return false;
+    if (query.category && categorySlug(course.category) !== query.category)
+      return false;
     if (
       query.levels.length &&
       !query.levels.includes(course.level.toLowerCase())

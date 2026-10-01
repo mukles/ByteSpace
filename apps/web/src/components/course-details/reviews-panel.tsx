@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { CreatorAvatar } from "@/components/creators/creator-avatar";
+import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
 import type { CourseDetailsData } from "@/types/content";
@@ -37,7 +39,9 @@ export function ReviewsPanel({ reviews }: Pick<CourseDetailsData, "reviews">) {
 
       <div className="flex flex-col items-stretch gap-6 rounded-2xl border border-shuttle-gray-200 bg-white p-6 backdrop-blur-[10px] sm:flex-row sm:items-center sm:p-10">
         <div className="flex shrink-0 flex-col items-center justify-center rounded-lg bg-secondary p-10 text-shuttle-gray-950 backdrop-blur-[20px]">
-          <p className="text-sm leading-[1.2] font-medium">{reviews.ratingLabel}</p>
+          <p className="text-sm leading-[1.2] font-medium">
+            {reviews.ratingLabel}
+          </p>
           <p className="font-heading text-[36px] leading-[1.2] font-semibold tracking-[-0.01em]">
             {reviews.rating}
           </p>
@@ -71,17 +75,13 @@ export function ReviewsPanel({ reviews }: Pick<CourseDetailsData, "reviews">) {
         {filters.map((stars) => {
           const active = stars === filter;
           return (
-            <button
+            <Button
               key={stars ?? "all"}
-              type="button"
+              variant={active ? "primary" : "muted"}
+              size="tab"
               aria-pressed={active}
               onClick={() => setFilter(stars)}
-              className={cn(
-                "flex shrink-0 cursor-pointer items-center justify-center gap-1 rounded-[24px] px-4 py-3 text-base leading-[1.2] font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-                active
-                  ? "bg-secondary text-shuttle-gray-950"
-                  : "bg-shuttle-gray-50 text-shuttle-gray-700 hover:bg-shuttle-gray-100",
-              )}
+              className="gap-1"
             >
               {stars === null ? (
                 reviews.allLabel
@@ -92,7 +92,7 @@ export function ReviewsPanel({ reviews }: Pick<CourseDetailsData, "reviews">) {
                   <span className="sr-only"> stars</span>
                 </>
               )}
-            </button>
+            </Button>
           );
         })}
       </div>
@@ -109,12 +109,11 @@ export function ReviewsPanel({ reviews }: Pick<CourseDetailsData, "reviews">) {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex flex-col gap-6">
                   <div className="flex items-start gap-3">
-                    <Image
+                    <CreatorAvatar
+                      name={review.name}
                       src={review.avatar}
-                      alt=""
-                      width={52}
-                      height={52}
-                      className="shrink-0 rounded-full"
+                      size={52}
+                      className="size-[52px] rounded-full text-lg"
                     />
                     <div>
                       <p className="text-lg leading-[1.2] font-medium text-shuttle-gray-950">
@@ -123,7 +122,10 @@ export function ReviewsPanel({ reviews }: Pick<CourseDetailsData, "reviews">) {
                       <p className={bodyClass}>{review.role}</p>
                     </div>
                   </div>
-                  <Stars count={review.rating} label={`Rated ${review.rating} out of 5`} />
+                  <Stars
+                    count={review.rating}
+                    label={`Rated ${review.rating} out of 5`}
+                  />
                 </div>
                 <p className={cn("shrink-0 whitespace-nowrap", bodyClass)}>
                   {review.date}

@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { CourseShowcaseData } from "@/types/content";
 import { CourseCard } from "./course-card";
@@ -43,29 +43,21 @@ export function CourseFilter({
         {[featuredLabel, ...categories].map((category) => {
           const isActive = category === active;
           return (
-            <button
+            <Button
               key={category}
-              type="button"
+              variant={isActive ? "primary" : "muted"}
+              size="tab"
               aria-pressed={isActive}
               onClick={() => setActive(category)}
-              className={cn(
-                "shrink-0 cursor-pointer whitespace-nowrap rounded-[24px] px-4 py-3 text-base leading-[1.2] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-                isActive
-                  ? "bg-secondary text-shuttle-gray-950"
-                  : "bg-shuttle-gray-50 text-shuttle-gray-700 hover:bg-shuttle-gray-100",
-              )}
             >
               {category}
-            </button>
+            </Button>
           );
         })}
         {moreLabel && moreHref && (
-          <Link
-            href={moreHref}
-            className="shrink-0 whitespace-nowrap text-base leading-[1.2] font-medium text-primary hover:underline"
-          >
+          <Button href={moreHref} variant="link" size="inline">
             {moreLabel}
-          </Link>
+          </Button>
         )}
       </div>
 

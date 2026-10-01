@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type SubmitEvent } from "react";
+import { Button } from "@/components/ui/button";
 import type { FooterData } from "@/types/content";
 
 export function NewsletterForm({
@@ -35,12 +36,9 @@ export function NewsletterForm({
           placeholder={placeholder}
           className="h-[52px] w-full rounded-full border border-shuttle-gray-200 bg-white px-6 text-base leading-[1.6] text-shuttle-gray-950 placeholder:text-shuttle-gray-950 focus:border-primary focus:outline-none sm:w-[376px]"
         />
-        <button
-          type="submit"
-          className="cursor-pointer rounded-[24px] bg-secondary px-6 py-3 text-lg leading-[1.2] font-medium text-secondary-foreground transition-colors hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+        <Button type="submit" className="text-secondary-foreground">
           {button}
-        </button>
+        </Button>
       </form>
       <p
         role="status"

@@ -3,13 +3,9 @@ import { CourseCard } from "@/components/courses/course-card";
 import { HappyStudentsCard, ProgressCard } from "@/components/hero/hero-cards";
 import { HeroShape } from "@/components/hero/hero-shape";
 import { Heading } from "@/components/ui/heading";
-import { readMd } from "@/lib/content";
+import { getShowcase, readMd } from "@/lib/content";
 import { cn } from "@/lib/utils";
-import type {
-  CourseShowcaseData,
-  GrowthData,
-  StatCardData,
-} from "@/types/content";
+import type { GrowthData, StatCardData } from "@/types/content";
 
 function StatCard({
   label,
@@ -66,9 +62,7 @@ const stage = "absolute top-0 left-0 origin-top-left scale-[0.55] sm:scale-100";
 
 export function Growth() {
   const { data } = readMd<GrowthData>("pages/growth");
-  const { data: showcase } = readMd<CourseShowcaseData>(
-    "pages/course-showcase",
-  );
+  const showcase = getShowcase();
   const { learner, creator } = data;
 
   return (

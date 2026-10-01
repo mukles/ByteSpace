@@ -13,8 +13,13 @@ import {
   parseCourseQuery,
   searchCourses,
 } from "@/lib/course-search";
-import { getCatalog, getCreatorSlugs, readMd } from "@/lib/content";
-import type { CoursesPageData, CreatorProfileData } from "@/types/content";
+import {
+  getCreatorCourses,
+  getCreatorProfile,
+  getCreatorSlugs,
+  readMd,
+} from "@/lib/content";
+import type { CoursesPageData } from "@/types/content";
 
 export const dynamicParams = false;
 
@@ -24,8 +29,9 @@ export function generateStaticParams() {
 
 async function getCreator(params: PageProps<"/creators/[slug]">["params"]) {
   const { slug } = await params;
-  if (!getCreatorSlugs().includes(slug)) notFound();
-  return readMd<CreatorProfileData>(`creators/${slug}`).data;
+  const profile = getCreatorProfile(slug);
+  if (!profile) notFound();
+  return { slug, ...profile };
 }
 
 export async function generateMetadata({
@@ -39,14 +45,18 @@ export default async function CreatorProfilePage({
   params,
   searchParams,
 }: PageProps<"/creators/[slug]">) {
-  const { productsLabel, toolbarIcons, emptyMessage, noResults, ...profile } =
-    await getCreator(params);
+  const {
+    slug,
+    productsLabel,
+    toolbarIcons,
+    emptyMessage,
+    noResults,
+    ...profile
+  } = await getCreator(params);
   const query = parseCourseQuery(await searchParams);
   const { data } = readMd<CoursesPageData>("pages/courses");
 
-  const own = getCatalog().filter(
-    (course) => course.author.toLowerCase() === profile.name.toLowerCase(),
-  );
+  const own = getCreatorCourses(slug);
   const categories = [...new Set(own.map((c) => c.category))].sort();
   const courses = searchCourses(own, query);
   const isFiltered = activeFilterCount(query) > 0;

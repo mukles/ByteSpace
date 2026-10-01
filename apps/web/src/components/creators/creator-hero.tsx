@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 import { Heading } from "@/components/ui/heading";
 import type { CreatorProfileData } from "@/types/content";
 import { CreatorAvatar } from "./creator-avatar";
@@ -50,9 +51,7 @@ export function CreatorHero({
                 >
                   {name}
                 </Heading>
-                <span className="rounded-[24px] bg-secondary px-6 py-2 text-base leading-[1.2] font-medium text-shuttle-gray-950 backdrop-blur-[20px]">
-                  {badge}
-                </span>
+                <Badge className="backdrop-blur-[20px]">{badge}</Badge>
               </div>
               <p className="text-lg leading-[1.6]">{tagline}</p>
             </div>
@@ -68,13 +67,16 @@ export function CreatorHero({
         <div className="flex flex-wrap items-center justify-between gap-4">
           <ul className="flex flex-wrap gap-4">
             {stats.map((stat) => (
-              <li
+              <Badge
+                as="li"
                 key={stat.label}
-                className="flex items-center gap-2 rounded-[24px] bg-white px-6 py-3 text-lg leading-[1.2] font-medium whitespace-nowrap text-shuttle-gray-950 backdrop-blur-[20px]"
+                variant="white"
+                size="lg"
+                className="backdrop-blur-[20px]"
               >
                 <span className="text-primary">{stat.value}</span>
                 {stat.label}
-              </li>
+              </Badge>
             ))}
           </ul>
           <FollowButton label={followLabel} followingLabel={followingLabel} />

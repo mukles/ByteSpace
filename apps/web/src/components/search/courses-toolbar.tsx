@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useId, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
+import { categorySlug } from "@/lib/course-search";
 import type { CoursesPageData } from "@/types/content";
 import {
   OptionRow,
@@ -37,9 +39,6 @@ function withIcon(label: ReactNode, icon?: string) {
   );
 }
 
-const clearClass =
-  "cursor-pointer text-sm leading-[1.2] font-medium text-primary hover:underline disabled:cursor-default disabled:text-shuttle-gray-300 disabled:no-underline";
-
 export function CoursesToolbar({
   filterLabel,
   price,
@@ -74,11 +73,11 @@ export function CoursesToolbar({
   };
 
   return (
-    <div className="relative flex flex-wrap items-center justify-between gap-4">
+    <div className="relative grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
       <div
         role="group"
         aria-label="Filter courses"
-        className="flex flex-wrap gap-4"
+        className="contents sm:flex sm:flex-wrap sm:gap-4"
       >
         <ToolbarDropdown
           label={withIcon(filterLabel, icons.filter)}
@@ -123,14 +122,15 @@ export function CoursesToolbar({
                 )}
               </fieldset>
               <PanelFooter>
-                <button
-                  type="button"
+                <Button
+                  variant="link"
+                  size="inline"
+                  className="text-sm"
                   disabled={filterCount === 0}
                   onClick={() => update({ price: null, rating: null })}
-                  className={clearClass}
                 >
                   {clearLabel}
-                </button>
+                </Button>
               </PanelFooter>
             </>
           )}
@@ -158,14 +158,15 @@ export function CoursesToolbar({
                 ))}
               </fieldset>
               <PanelFooter>
-                <button
-                  type="button"
+                <Button
+                  variant="link"
+                  size="inline"
+                  className="text-sm"
                   disabled={query.levels.length === 0}
                   onClick={() => update({ level: null })}
-                  className={clearClass}
                 >
                   {clearLabel}
-                </button>
+                </Button>
               </PanelFooter>
             </>
           )}
@@ -176,7 +177,10 @@ export function CoursesToolbar({
             query.category ? (
               <>
                 <span className="sr-only">{categoryLabel}: </span>
-                <span className="max-w-60 truncate">{query.category}</span>
+                <span className="max-w-60 truncate">
+                  {categories.find((c) => categorySlug(c) === query.category) ??
+                    query.category}
+                </span>
               </>
             ) : (
               categoryLabel
@@ -197,10 +201,14 @@ export function CoursesToolbar({
                   name={`${id}-category`}
                   label={category}
                   checked={
-                    i === 0 ? !query.category : query.category === category
+                    i === 0
+                      ? !query.category
+                      : query.category === categorySlug(category)
                   }
                   onChange={() => {
-                    update({ category: i === 0 ? null : category });
+                    update({
+                      category: i === 0 ? null : categorySlug(category),
+                    });
                     close();
                   }}
                 />

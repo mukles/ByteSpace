@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
 import type { Course } from "@/types/content";
@@ -8,9 +9,6 @@ const AVATARS = Array.from(
   { length: 4 },
   (_, i) => `/images/courses/avatar-${i + 1}.png`,
 );
-
-const statChipClass =
-  "rounded-[24px] bg-[rgba(246,246,246,0.6)] px-3 py-1.5 text-xs leading-[1.2] font-medium text-black-700 backdrop-blur-[4px]";
 
 const VARIANTS = {
   default: {
@@ -54,9 +52,15 @@ export function CourseCard({
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <ul className="absolute bottom-[19px] left-3 flex flex-wrap gap-3">
-          <li className={statChipClass}>{course.lessons}</li>
-          <li className={statChipClass}>{course.duration}</li>
-          <li className={statChipClass}>{course.comments}</li>
+          <Badge as="li" variant="glass" size="xs">
+            {course.lessons}
+          </Badge>
+          <Badge as="li" variant="glass" size="xs">
+            {course.duration}
+          </Badge>
+          <Badge as="li" variant="glass" size="xs">
+            {course.reviews}
+          </Badge>
         </ul>
       </div>
 
@@ -88,7 +92,7 @@ export function CourseCard({
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1 rounded-[24px] bg-shuttle-gray-50 px-3 py-1.5 text-xs leading-[1.2] font-medium text-shuttle-gray-700">
+          <Badge variant="muted" size="xs">
             <Image
               src="/images/courses/level.svg"
               alt=""
@@ -96,7 +100,7 @@ export function CourseCard({
               height={20}
             />
             {course.level}
-          </span>
+          </Badge>
           <div className="flex">
             {AVATARS.map((src) => (
               <Image

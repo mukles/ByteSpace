@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { CoursePreview } from "@/components/course-details/course-preview";
 import { CourseSidebar } from "@/components/course-details/course-sidebar";
 import { CourseTabs } from "@/components/course-details/course-tabs";
 import { ShareButton } from "@/components/course-details/share-button";
+import { Badge } from "@/components/ui/badge";
 import { Heading } from "@/components/ui/heading";
 import { getCourseDetails, getCourseSlugs } from "@/lib/content";
 
@@ -69,15 +71,24 @@ export default async function CourseDetailsPage({
             <p className="text-lg leading-[1.2] font-medium text-[#f1f4fe]">
               by <span className="text-secondary">{course.author}</span>
             </p>
-            <ul className="flex flex-wrap gap-3 md:gap-4">
+            <ul className="flex flex-wrap gap-2 md:gap-4">
               {course.stats.map((stat) => (
-                <li
+                <Badge
+                  as="li"
                   key={stat.label}
-                  className="flex items-center gap-2 rounded-[24px] bg-white px-6 py-2 text-base leading-[1.2] font-medium text-shuttle-gray-950 backdrop-blur-[20px]"
+                  variant="white"
+                  size="sm"
+                  className="backdrop-blur-[20px] md:gap-2 md:px-6 md:py-2 md:text-base"
                 >
-                  <Image src={stat.icon} alt="" width={24} height={24} />
+                  <Image
+                    src={stat.icon}
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="size-5 md:size-6"
+                  />
                   {stat.label}
-                </li>
+                </Badge>
               ))}
             </ul>
           </div>
@@ -85,27 +96,7 @@ export default async function CourseDetailsPage({
         </header>
 
         <div className="relative col-start-1 row-start-2 aspect-[720/479] overflow-hidden rounded-[24px] bg-[#443131]">
-          <Image
-            src={course.preview.image}
-            alt=""
-            fill
-            priority
-            sizes="(min-width: 1024px) 720px, 100vw"
-            className="object-cover"
-          />
-          <button
-            type="button"
-            aria-label={course.preview.playLabel}
-            className="absolute top-1/2 left-1/2 flex -translate-1/2 cursor-pointer items-center justify-center rounded-[24px] border border-black-700 bg-[rgba(61,61,61,0.24)] p-2 backdrop-blur-[20px] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:p-4"
-          >
-            <Image
-              src="/images/course-details/play.svg"
-              alt=""
-              width={72}
-              height={72}
-              className="size-12 sm:size-[72px]"
-            />
-          </button>
+          <CoursePreview {...course.preview} />
         </div>
 
         <CourseSidebar
