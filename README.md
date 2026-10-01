@@ -1,38 +1,58 @@
 # ByteSpace
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A Turborepo with two apps:
 
-## Getting Started
+- `apps/web` — the Next.js site (`@repo/web`, port 3000)
+- `apps/api` — a NestJS auth API backed by Postgres via TypeORM (`@repo/api`, port 3001)
 
-First, run the development server:
+## Getting started
+
+Requires Node 22 and Docker.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp apps/api/.env.example apps/api/.env.local   # then set JWT_SECRET
+cp apps/web/.env.example apps/web/.env.local
+npm run db:up        # Postgres on localhost:5434
+npm run db:migrate   # create the tables
+npm run dev          # web + api
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and use **Join Us** to register or **Sign In** to log in.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command              | What it does                                |
+| -------------------- | ------------------------------------------- |
+| `npm run dev`        | Run both apps in watch mode                 |
+| `npm run build`      | Build both apps                             |
+| `npm run lint`       | Lint both apps                              |
+| `npm run typecheck`  | Type-check both apps                        |
+| `npm run db:up`      | Start Postgres in Docker                    |
+| `npm run db:down`    | Stop Postgres                               |
+| `npm run db:migrate` | Run pending TypeORM migrations              |
 
-## Learn More
+To change the schema, edit the entities in `apps/api/src/auth/entities`, then from `apps/api` run
+`npm run db:generate -- src/migrations/<Name>`.
 
-To learn more about Next.js, take a look at the following resources:
+## How auth works
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- The API issues a short-lived JWT access token and a rotating refresh token. Each login starts one
+  session per user, so signing in elsewhere ends the previous session.
+- Refresh tokens are single-use. A token replayed within 10 seconds of its rotation gets the same
+  replacement (so parallel requests don't log the user out); a later replay revokes the session.
+- The web app keeps both tokens in `httpOnly` cookies. The login and signup forms post through
+  server actions, `src/proxy.ts` rotates an expired access token before pages render and sends
+  signed-in users away from `/login` and `/signup`, and the navbar reads the user from
+  `/api/auth/session`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### API endpoints (`/api/v1`)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Method | Path             | Body                          |
+| ------ | ---------------- | ----------------------------- |
+| POST   | `/auth/register` | `{ name, email, password }`   |
+| POST   | `/auth/login`    | `{ email, password }`         |
+| POST   | `/auth/refresh`  | `{ refresh_token }`           |
+| POST   | `/auth/logout`   | `{ refresh_token }`           |
+| GET    | `/auth/me`       | `Authorization: Bearer <jwt>` |
+| GET    | `/health`        |                               |
