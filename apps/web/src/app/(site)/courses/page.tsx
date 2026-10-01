@@ -29,7 +29,9 @@ export default async function CoursesPage({
   const query = parseCourseQuery(params);
 
   const { data } = readMd<CoursesPageData>("pages/courses");
-  const { data: showcase } = readMd<CourseShowcaseData>("pages/course-showcase");
+  const { data: showcase } = readMd<CourseShowcaseData>(
+    "pages/course-showcase",
+  );
   const catalog = getCatalog();
   const categories = [...new Set(catalog.map((c) => c.category))].sort();
 
@@ -55,7 +57,9 @@ export default async function CoursesPage({
     return `/courses${qs ? `?${qs}` : ""}#results`;
   };
   const hiddenFields = Object.fromEntries(
-    Object.entries(current).filter(([key]) => !["q", "scope", "page"].includes(key)),
+    Object.entries(current).filter(
+      ([key]) => !["q", "scope", "page"].includes(key),
+    ),
   );
 
   const isFiltered = Boolean(query.q) || activeFilterCount(query) > 0;
@@ -120,7 +124,10 @@ export default async function CoursesPage({
 
           <ResultsPane>
             {courses.length > 0 ? (
-              <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-8 lg:grid-cols-3 lg:gap-10">
+              <ul
+                data-reveal-stagger
+                className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-8 lg:grid-cols-3 lg:gap-10"
+              >
                 {courses.map((course) => (
                   <li key={course.slug}>
                     <CourseCard course={course} />

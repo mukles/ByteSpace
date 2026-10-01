@@ -33,7 +33,10 @@ export function Testimonials() {
       </div>
 
       <div className="mx-auto max-w-[1236px] px-4 pt-16 pb-10 lg:pt-[74px] lg:pb-[72px]">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:gap-[43px]">
+        <div
+          data-reveal
+          className="flex flex-col gap-4 lg:flex-row lg:items-end lg:gap-[43px]"
+        >
           <Heading
             as="h2"
             size="heading-m"
@@ -48,7 +51,7 @@ export function Testimonials() {
         </div>
       </div>
 
-      <div className="pb-16 lg:pb-[60px]">
+      <div data-reveal className="pb-16 lg:pb-[60px]">
         <TestimonialSlider testimonials={data.testimonials} />
       </div>
     </section>

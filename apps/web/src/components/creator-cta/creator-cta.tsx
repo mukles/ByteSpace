@@ -81,7 +81,10 @@ export function CreatorCta() {
         ))}
       </div>
 
-      <div className="mx-auto flex max-w-[996px] flex-col items-center gap-8 px-4 py-20 text-center lg:gap-10 lg:py-[85px]">
+      <div
+        data-reveal="scale"
+        className="mx-auto flex max-w-[996px] flex-col items-center gap-8 px-4 py-20 text-center lg:gap-10 lg:py-[85px]"
+      >
         <Heading
           as="h2"
           size="heading-m"

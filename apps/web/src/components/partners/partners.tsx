@@ -11,7 +11,10 @@ const LOGOS = [
 export function Partners() {
   return (
     <section aria-label="Our partners" className="bg-shuttle-gray-50">
-      <ul className="mx-auto flex max-w-[1200px] flex-wrap items-end justify-center gap-x-10 gap-y-8 px-4 py-12 md:gap-x-14 lg:gap-x-[72px] lg:py-20">
+      <ul
+        data-reveal-stagger
+        className="mx-auto flex max-w-[1200px] flex-wrap items-end justify-center gap-x-10 gap-y-8 px-4 py-12 md:gap-x-14 lg:gap-x-[72px] lg:py-20"
+      >
         {LOGOS.map((logo, i) => (
           <li key={logo.src} className="shrink-0">
             <Image

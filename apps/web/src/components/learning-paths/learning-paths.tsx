@@ -10,7 +10,10 @@ export function LearningPaths() {
   return (
     <section className="bg-white pb-16 lg:pb-[120px]">
       <div className="mx-auto max-w-[1234px] px-4">
-        <div className="flex flex-col items-center gap-4 text-center">
+        <div
+          data-reveal
+          className="flex flex-col items-center gap-4 text-center"
+        >
           <Heading
             as="h2"
             size="heading-m"
@@ -24,7 +27,10 @@ export function LearningPaths() {
           </p>
         </div>
 
-        <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:mt-[68px] lg:grid-cols-6 lg:gap-10">
+        <ul
+          data-reveal-stagger
+          className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:mt-[68px] lg:grid-cols-6 lg:gap-10"
+        >
           {data.categories.map((category) => (
             <li key={category.name}>
               <Link
